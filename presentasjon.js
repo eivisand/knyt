@@ -60,40 +60,40 @@ function startLightCycle(element, includeExtraOrange){
     let lights = element.querySelectorAll(".trafficLight-light");
     setRed(lights, continueIndicator, includeExtraOrange);
 }
-function setRed(lights, continueIndicator, includeExtraOrange, interval){
+function setRed(lights, continueIndicator, includeExtraOrange){
     lights[0].classList.add("trafficLight-light--active");
     lights[1].classList.remove("trafficLight-light--active");
     lights[2].classList.remove("trafficLight-light--active");
     if(state[continueIndicator]){
         if(includeExtraOrange){
-            setTimeout(() => setOrangeRed(lights, continueIndicator, includeExtraOrange, interval), interval || 2000);
+            setTimeout(() => setOrangeRed(lights, continueIndicator, includeExtraOrange), 2000);
         } else {
-            setTimeout(() => setGreen(lights, continueIndicator, includeExtraOrange, interval), interval || 2000);
+            setTimeout(() => setGreen(lights, continueIndicator, includeExtraOrange), 2000);
         }
     }
 }
-function setOrangeRed(lights, continueIndicator, includeExtraOrange, interval){
+function setOrangeRed(lights, continueIndicator, includeExtraOrange){
     lights[0].classList.add("trafficLight-light--active");
     lights[1].classList.add("trafficLight-light--active");
     lights[2].classList.remove("trafficLight-light--active");
     if(state[continueIndicator]){
-        setTimeout(() => setGreen(lights, continueIndicator, includeExtraOrange, interval), 1000);
+        setTimeout(() => setGreen(lights, continueIndicator, includeExtraOrange ), 1000);
     }
 }
-function setOrange(lights, continueIndicator, includeExtraOrange, interval){
+function setOrange(lights, continueIndicator, includeExtraOrange, ){
     lights[0].classList.remove("trafficLight-light--active");
     lights[1].classList.add("trafficLight-light--active");
     lights[2].classList.remove("trafficLight-light--active");
     if(state[continueIndicator]){
-        setTimeout(() => setRed(lights, continueIndicator, includeExtraOrange, interval), 1000);
+        setTimeout(() => setRed(lights, continueIndicator, includeExtraOrange), 1000);
     }
 }
-function setGreen(lights, continueIndicator, includeExtraOrange, interval){
+function setGreen(lights, continueIndicator, includeExtraOrange, ){
     lights[0].classList.remove("trafficLight-light--active");
     lights[1].classList.remove("trafficLight-light--active");
     lights[2].classList.add("trafficLight-light--active");
     if(state[continueIndicator]){
-        setTimeout(() => setOrange(lights, continueIndicator, includeExtraOrange, interval), interval || 2000);
+        setTimeout(() => setOrange(lights, continueIndicator, includeExtraOrange), 2000);
     }
 }
 
@@ -114,15 +114,55 @@ function revealCrossover(event){
     }, 6000)
 }
 function crossOverAllLights(event){
-    const indicator = document.getElementById("crossOverRevealIndicator");
+    const indicator = document.getElementById("crossOverAllLightsIndicator");
     indicator.classList.add("crossOverBox-indicator--active");
     const trafficLights = document.querySelectorAll(".trafficLight.crossoverAll");
     
-    trafficLights.forEach((trafficLight) => rollToGreen(trafficLight.querySelectorAll(".trafficLight-light")), this);
+    trafficLights.forEach((trafficLight) => 
+        rollToGreen(trafficLight.querySelectorAll(".trafficLight-light"), trafficLight.classList.contains("trafficLight--ped")
+    )
+    , this);
+    window.setTimeout(() => indicator.classList.remove("crossOverBox-indicator--active"), 7000);
 }
-function rollToGreen(lights){
-    window.setTimeout(()=> setOrangeRed(lights, "allwaysTrue", true, 10000), 6000)
+function rollToGreen(lights, isPed){
+    console.log(isPed);
+    window.setTimeout(() => setOrangeRed_redRoll(lights, isPed), 6000)
 }
+function setOrangeRed_redRoll(lights,  isPed){
+    if(!isPed){
+        lights[0].classList.add("trafficLight-light--active");
+        lights[1].classList.add("trafficLight-light--active");
+        lights[2].classList.remove("trafficLight-light--active");
+    }
+    setTimeout(() => setGreen_redRoll(lights, isPed), 1000);
+}
+function setGreen_redRoll(lights,  isPed){
+    lights[0].classList.remove("trafficLight-light--active");    
+    if(isPed){
+        lights[1].classList.add("trafficLight-light--active");
+    } else{
+        lights[1].classList.remove("trafficLight-light--active");
+    }
+    lights[2].classList.add("trafficLight-light--active");
+    setTimeout(() => setOrange_redRoll(lights, isPed), 10000);
+}
+function setOrange_redRoll(lights,  isPed){
+    if(isPed){
+        lights[0].classList.add("trafficLight-light--active");    
+        lights[1].classList.remove("trafficLight-light--active");
+    } else{
+        lights[0].classList.remove("trafficLight-light--active");    
+        lights[1].classList.add("trafficLight-light--active");
+    }
+    lights[2].classList.remove("trafficLight-light--active");
+    setTimeout(() => setRed_redRoll(lights, isPed), 1000);
+}
+function setRed_redRoll(lights,  isPed){
+    lights[0].classList.add("trafficLight-light--active");    
+    lights[1].classList.remove("trafficLight-light--active");
+    lights[2].classList.remove("trafficLight-light--active");
+}
+
 (function init(){
     window.addEventListener("keydown", handleKeyDown);
     document.getElementById("crossOverRevealAction").addEventListener("click", revealCrossover)
