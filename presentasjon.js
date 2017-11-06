@@ -1,6 +1,7 @@
 let state = {
     currentSlideNumber: 1,
     currentSlide: document.getElementById("slide_1"),
+    allwaysTrue: true,
 }
 
 let handleKeyDown = (event) => {
@@ -59,40 +60,40 @@ function startLightCycle(element, includeExtraOrange){
     let lights = element.querySelectorAll(".trafficLight-light");
     setRed(lights, continueIndicator, includeExtraOrange);
 }
-function setRed(lights, continueIndicator, includeExtraOrange){
+function setRed(lights, continueIndicator, includeExtraOrange, interval){
     lights[0].classList.add("trafficLight-light--active");
     lights[1].classList.remove("trafficLight-light--active");
     lights[2].classList.remove("trafficLight-light--active");
     if(state[continueIndicator]){
         if(includeExtraOrange){
-            setTimeout(() => setOrangeRed(lights, continueIndicator, includeExtraOrange), 2000);
+            setTimeout(() => setOrangeRed(lights, continueIndicator, includeExtraOrange, interval), interval || 2000);
         } else {
-            setTimeout(() => setGreen(lights, continueIndicator, includeExtraOrange), 2000);
+            setTimeout(() => setGreen(lights, continueIndicator, includeExtraOrange, interval), interval || 2000);
         }
     }
 }
-function setOrangeRed(lights, continueIndicator, includeExtraOrange){
+function setOrangeRed(lights, continueIndicator, includeExtraOrange, interval){
     lights[0].classList.add("trafficLight-light--active");
     lights[1].classList.add("trafficLight-light--active");
     lights[2].classList.remove("trafficLight-light--active");
     if(state[continueIndicator]){
-        setTimeout(() => setGreen(lights, continueIndicator, includeExtraOrange), 1000);
+        setTimeout(() => setGreen(lights, continueIndicator, includeExtraOrange, interval), 1000);
     }
 }
-function setOrange(lights, continueIndicator, includeExtraOrange){
+function setOrange(lights, continueIndicator, includeExtraOrange, interval){
     lights[0].classList.remove("trafficLight-light--active");
     lights[1].classList.add("trafficLight-light--active");
     lights[2].classList.remove("trafficLight-light--active");
     if(state[continueIndicator]){
-        setTimeout(() => setRed(lights, continueIndicator, includeExtraOrange), 1000);
+        setTimeout(() => setRed(lights, continueIndicator, includeExtraOrange, interval), 1000);
     }
 }
-function setGreen(lights, continueIndicator, includeExtraOrange){
+function setGreen(lights, continueIndicator, includeExtraOrange, interval){
     lights[0].classList.remove("trafficLight-light--active");
     lights[1].classList.remove("trafficLight-light--active");
     lights[2].classList.add("trafficLight-light--active");
     if(state[continueIndicator]){
-        setTimeout(() => setOrange(lights, continueIndicator, includeExtraOrange), 2000);
+        setTimeout(() => setOrange(lights, continueIndicator, includeExtraOrange, interval), interval || 2000);
     }
 }
 
@@ -100,9 +101,30 @@ function breakCycle(element){
     state[`keepCycle${element.id}`] = false;
 }
 function revealCrossover(event){
-
+    const indicator = document.getElementById("crossOverRevealIndicator");
+    indicator.classList.add("crossOverBox-indicator--active");
+    const light = document.getElementById("crossOverRevealLight");
+    const lights = light.querySelectorAll(".trafficLight-light");
+    
+    window.setTimeout(() => lights[1].classList.add("trafficLight-light--active"), 5000)
+    window.setTimeout(() => {
+        lights[1].classList.remove("trafficLight-light--active"); 
+        lights[2].classList.add("trafficLight-light--active"); 
+        indicator.classList.remove("crossOverBox-indicator--active");
+    }, 6000)
+}
+function crossOverAllLights(event){
+    const indicator = document.getElementById("crossOverRevealIndicator");
+    indicator.classList.add("crossOverBox-indicator--active");
+    const trafficLights = document.querySelectorAll(".trafficLight.crossoverAll");
+    
+    trafficLights.forEach((trafficLight) => rollToGreen(trafficLight.querySelectorAll(".trafficLight-light")), this);
+}
+function rollToGreen(lights){
+    window.setTimeout(()=> setOrangeRed(lights, "allwaysTrue", true, 10000), 6000)
 }
 (function init(){
     window.addEventListener("keydown", handleKeyDown);
     document.getElementById("crossOverRevealAction").addEventListener("click", revealCrossover)
+    document.getElementById("crossOverAllLights").addEventListener("click", crossOverAllLights)
 })()

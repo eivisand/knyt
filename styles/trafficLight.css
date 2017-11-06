@@ -9,6 +9,8 @@
     align-items: center;
     padding-bottom: 2vh;
     padding-top: 2vh;
+    margin-left: 5vh;
+    margin-right: 5vh;
 }
 .trafficLight-light {
     width: 17vh;
@@ -16,6 +18,9 @@
     background: #555;
     border-radius: 50%;
     transition: background-color ease-in 0.1s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .trafficLight-light--active:nth-child(1) {
     background-color: #c23;
@@ -40,8 +45,12 @@
 .crossOverBox-indicator {
     width: 50%;
     height: 6vh;
-    background: #bbc;
+    background-color: #bbc;
     margin-bottom: 2vh;
+    transition: background-color ease-in 0.1s;
+}
+.crossOverBox-indicator--active {
+    background-color: #ee2;
 }
 .crossOverBox-button {
     background: transparent;
