@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="50px" height="50px" viewBox="10 10 80 80" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.1 (44463) - http://www.bohemiancoding.com/sketch -->
+    <title>Crossing</title>
+    <desc>Hardskreva.</desc>
+    <defs></defs>
+    <g id="crossing" stroke="none" stroke-width="0" fill="none" fill-rule="evenodd">
+        <rect x="45" y="10" width="10" height="15" fill="#fff" >
+        </rect>
+        <polygon points="35,30 65,30 60,60 40,60" fill="#fff"></polygon>
+        <polygon points="33,30 34,36 24,51 23,45" fill="#fff"></polygon>
+        <polygon points="67,30 66,36 76,51 77,45" fill="#fff"></polygon>
+        <rect x="40" y="65" width="7" height="25" fill="#fff" >
+        </rect>
+        <rect x="53" y="65" width="7" height="25" fill="#fff" >
+        </rect>
+    </g>
+</svg>

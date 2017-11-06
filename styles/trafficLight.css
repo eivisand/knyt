@@ -39,7 +39,19 @@
 }
 .crossOverBox-indicator {
     width: 50%;
-    height: 4vh;
+    height: 6vh;
     background: #bbc;
     margin-bottom: 2vh;
+}
+.crossOverBox-button {
+    background: transparent;
+    border: none;
+    margin-top: 3vh;
+}
+.pointUp {
+    width: 60%;
+}
+.dude {
+    width: 60%;
+    margin-bottom: 1vh;
 }

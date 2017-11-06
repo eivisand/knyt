@@ -99,6 +99,10 @@ function setGreen(lights, continueIndicator, includeExtraOrange){
 function breakCycle(element){
     state[`keepCycle${element.id}`] = false;
 }
+function revealCrossover(event){
+
+}
 (function init(){
     window.addEventListener("keydown", handleKeyDown);
+    document.getElementById("crossOverRevealAction").addEventListener("click", revealCrossover)
 })()
