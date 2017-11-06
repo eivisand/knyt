@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="50px" height="50px" viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.1 (44463) - http://www.bohemiancoding.com/sketch -->
+    <title>Crossing</title>
+    <desc>Hardskreva.</desc>
+    <defs></defs>
+    <g id="crossing" class="svgAnimation" stroke="none" stroke-width="5" fill="none" fill-rule="evenodd">
+        <path d="M 70 100 L 70 67.5" id="Shape" fill="#fff" stroke="#fff" fill-rule="nonzero">
+         <animate dur="1s" repeatCount="1" attributeName="d"
+                   values="
+                    M 20 85 L 80 85;
+                    M 70 100 L 70 67.5;
+                   "
+                   >
+          </animate>
+        </path>
+        <path d="M 30 100 L 30 67.5" id="Shape" fill="#fff" stroke="#fff" fill-rule="nonzero">
+            <animate dur="1s" repeatCount="1" attributeName="d"
+                   values="
+                    M 20 75 L 80 75;
+                    M 30 100 L 30 67.5;
+                   "
+                   >
+          </animate>
+        </path>
+        <path d="M 0 70 L 32.5 70" id="Shape" fill="#fff" stroke="#fff" fill-rule="nonzero">
+         <animate dur="1s" repeatCount="1" attributeName="d"
+                   values="
+                    M 20 65 L 80 65;
+                    M 0 70 L 32.5 70;
+                   "
+                   >
+          </animate>
+        </path>
+        <path d="M 0 30 L 32.5 30" id="Shape" fill="#fff" stroke="#fff" fill-rule="nonzero">
+         <animate dur="1s" repeatCount="1" attributeName="d"
+                   values="
+                    M 20 55 L 80 55;
+                    M 0 30 L 32.5 30;
+                   "
+                   >
+          </animate>
+        </path>
+        <path d="M 100 70 L 67.5 70" id="Shape" fill="#fff" stroke="#fff" fill-rule="nonzero">
+            <animate dur="1s" repeatCount="1" attributeName="d"
+                   values="
+                    M 80 45 L 20 45;
+                    M 100 70 L 67.5 70;
+                   "
+                   >
+          </animate>
+        </path>
+        <path d="M 100 30 L 67.5 30" id="Shape" fill="#fff" stroke="#fff" fill-rule="nonzero">
+                <animate dur="1s" repeatCount="1" attributeName="d"
+                   values="
+                    M 80 35 L 20 35;
+                    M 100 30 L 67.5 30;
+                   "
+                   >
+          </animate>
+        </path>
+        <path d="M 30 0 L 30 32.5" id="Shape" fill="#fff" stroke="#fff" fill-rule="nonzero">
+            <animate dur="1s" repeatCount="1" attributeName="d"
+                   values="
+                    M 20 25 L 80 25;
+                    M 30 0 L 30 32.5;
+                   "
+                   >
+            </animate>
+        </path>
+        <path d="M 70 0 L 70 32.5" id="Shape" fill="#fff" stroke="#fff" fill-rule="nonzero">
+            <animate dur="1s" repeatCount="1" attributeName="d"
+                   values="
+                    M 20 15 L 80 15;
+                    M 70 0 L 70 32.5;
+                   "
+                   >
+            </animate>
+        </path>
+    </g>
+</svg>

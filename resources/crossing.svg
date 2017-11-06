@@ -4,8 +4,22 @@
     <title>Crossing</title>
     <desc>Hardskreva.</desc>
     <defs></defs>
-    <g id="crossing" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <path d="M20,85 L80,85 M20,75 L80,75 M20,65 L80,65 M20,55 L80,55 M20,45 L80,45 M20,35 L80,35 M20,35 L80,35" id="Shape" fill="#fff" fill-rule="nonzero">
+    <g id="crossing" stroke="none" stroke-width="5" fill="none" fill-rule="evenodd">
+        <path d="M 20 85 L 80 85" id="Shape" fill="#fff" stroke="#fff" fill-rule="nonzero">
+        </path>
+        <path d="M 20 75 L 80 75" id="Shape" fill="#fff" stroke="#fff" fill-rule="nonzero">
+        </path>
+        <path d="M 20 65 L 80 65" id="Shape" fill="#fff" stroke="#fff" fill-rule="nonzero">
+        </path>
+        <path d="M 20 55 L 80 55" id="Shape" fill="#fff" stroke="#fff" fill-rule="nonzero">
+        </path>
+        <path d="M 20 45 L 80 45" id="Shape" fill="#fff" stroke="#fff" fill-rule="nonzero">
+        </path>
+        <path d="M 20 35 L 80 35" id="Shape" fill="#fff" stroke="#fff" fill-rule="nonzero">
+        </path>
+        <path d="M 20 25 L 80 25" id="Shape" fill="#fff" stroke="#fff" fill-rule="nonzero">
+        </path>
+        <path d="M 20 15 L 80 15" id="Shape" fill="#fff" stroke="#fff" fill-rule="nonzero">
         </path>
     </g>
 </svg>

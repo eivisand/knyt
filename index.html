@@ -6,18 +6,69 @@
   <title></title>
   <meta name="author" content="!win">
   <meta name="description" content="presentasjon av skit i trafikk">
-  <link href="style.css" rel="stylesheet">
+  <link href="styles/slides.css" rel="stylesheet">
+  <link href="styles/crossing.css" rel="stylesheet">
+  <link href="styles/trafficLight.css" rel="stylesheet">
 </head>
 
 <body>
-  <img class="crossing crossing--closeup" src="/resources/crossing.svg">
-  <div class="slide" id="slide_1">
-    <div class="road road--entrance"></div>
-    <div class="road road--entrance"></div>
-    <div class="road road--entrance"></div>
-    <div class="road road--entrance"></div>
-</div>
 
+    <div class="slide slide--inFocus" id="slide_1">
+        <img class="crossing crossing--closeup" src="resources/crossing.svg">
+    </div>
+    <div class="slide animate" id="slide_2">
+        <img class="crossing crossing--closeup crossing--toRoads animated" src="resources/crossingToRoads.svg">
+    </div>
+    <div class="slide" id="slide_3">
+        <img class="crossing crossing--closeup crossing--toRoads animated" src="resources/crossRoads.svg">
+        <div class="crossing-overlay">
+            <img class="crossing crossing--onCrossroads crossing--fadein" src="resources/crossing.svg">
+            <img class="crossing crossing--onCrossroads crossing--fadein" src="resources/crossing.svg">
+            <img class="crossing crossing--onCrossroads crossing--fadein" src="resources/crossing.svg">
+            <img class="crossing crossing--onCrossroads crossing--fadein" src="resources/crossing.svg">
+        </div>
+    </div>
+    <div class="slide" id="slide_4">
+        <img class="crossing crossing--closeup crossing--toRoads animated" src="resources/crossRoads.svg">
+        <div class="crossing-overlay">
+            <img class="crossing crossing--onCrossroads crossing--fadeout" src="resources/crossing.svg">
+            <img class="crossing crossing--onCrossroads" src="resources/crossing.svg">
+            <img class="crossing crossing--onCrossroads" src="resources/crossing.svg">
+            <img class="crossing crossing--onCrossroads" src="resources/crossing.svg">
+        </div>
+    </div>
+    <div class="slide" id="slide_5">
+        <div class="trafficLight">
+            <div class="trafficLight-light"></div>
+            <div class="trafficLight-light trafficLight-light--active"></div>
+            <div class="trafficLight-light"></div>
+        </div>
+    </div>
+    <div class="slide cycleLight" id="slide_6">
+        <div class="trafficLight">
+            <div class="trafficLight-light"></div>
+            <div class="trafficLight-light"></div>
+            <div class="trafficLight-light"></div>
+        </div>
+    </div>
+    <div class="slide cycleRight" id="slide_7">
+        <div class="trafficLight">
+            <div class="trafficLight-light"></div>
+            <div class="trafficLight-light"></div>
+            <div class="trafficLight-light"></div>
+        </div>
+    </div>
+    <div class="slide" id="slide_8">
+        <div class="trafficLight">
+            <div class="trafficLight-light"></div>
+            <div class="trafficLight-light"></div>
+            <div class="trafficLight-light"></div>
+        </div>
+        <div class="crossOverBox">
+            <button class="crossOverBox-button"></button>
+            <div class="crossOverBox-indicator"></div>
+        </div>
+    </div>
   <script src="presentasjon.js"></script>
 </body>
 
