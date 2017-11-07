@@ -14,9 +14,6 @@ let handleKeyDown = (event) => {
         case 37:
             jumpSlides(-1);
             return;
-        case 32:
-            startCar();
-            return;
         case 87:
             startCar();
             return;
@@ -25,9 +22,6 @@ let handleKeyDown = (event) => {
 }
 let handleKeyUp = (event) => {
     switch(event.keyCode){
-        case 32:
-            stopCar();
-            return;
         case 87:
             stopCar();
             return;
