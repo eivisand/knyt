@@ -2,6 +2,8 @@ let state = {
     currentSlideNumber: 1,
     currentSlide: document.getElementById("slide_1"),
     allwaysTrue: true,
+    drivingTime: 7000,
+    isDriving: false,
 }
 
 let handleKeyDown = (event) => {
@@ -12,7 +14,25 @@ let handleKeyDown = (event) => {
         case 37:
             jumpSlides(-1);
             return;
+        case 32:
+            startCar();
+            return;
+        case 87:
+            startCar();
+            return;
     }
+    console.log(event);
+}
+let handleKeyUp = (event) => {
+    switch(event.keyCode){
+        case 32:
+            stopCar();
+            return;
+        case 87:
+            stopCar();
+            return;
+    }
+    console.log(event);
 }
 function jumpSlides(jumpBy){
     console.log(`slide_${state.currentSlideNumber+jumpBy}`);
@@ -125,46 +145,97 @@ function crossOverAllLights(event){
     window.setTimeout(() => indicator.classList.remove("crossOverBox-indicator--active"), 7000);
 }
 function rollToGreen(lights, isPed){
-    console.log(isPed);
-    window.setTimeout(() => setOrangeRed_redRoll(lights, isPed), 6000)
+    window.setTimeout(() => setOrangeRed_Roll(lights, isPed, 3), 6000)
 }
-function setOrangeRed_redRoll(lights,  isPed){
+function setOrangeRed_Roll(lights,  isPed, iterations){
     if(!isPed){
         lights[0].classList.add("trafficLight-light--active");
         lights[1].classList.add("trafficLight-light--active");
         lights[2].classList.remove("trafficLight-light--active");
     }
-    setTimeout(() => setGreen_redRoll(lights, isPed), 1000);
+    if(iterations < 1) return
+    setTimeout(() => setGreen_Roll(lights, isPed, iterations-1), 1000);
 }
-function setGreen_redRoll(lights,  isPed){
+function setGreen_Roll(lights,  isPed, iterations){
     lights[0].classList.remove("trafficLight-light--active");    
-    if(isPed){
-        lights[1].classList.add("trafficLight-light--active");
-    } else{
-        lights[1].classList.remove("trafficLight-light--active");
-    }
+    lights[1].classList.remove("trafficLight-light--active");
     lights[2].classList.add("trafficLight-light--active");
-    setTimeout(() => setOrange_redRoll(lights, isPed), 10000);
+    if(iterations < 1) return
+    setTimeout(() => setOrange_Roll(lights, isPed, iterations-1), 10000);
 }
-function setOrange_redRoll(lights,  isPed){
+function setOrange_Roll(lights,  isPed, iterations){
     if(isPed){
         lights[0].classList.add("trafficLight-light--active");    
-        lights[1].classList.remove("trafficLight-light--active");
+        lights[1].classList.add("trafficLight-light--active");
     } else{
         lights[0].classList.remove("trafficLight-light--active");    
         lights[1].classList.add("trafficLight-light--active");
     }
     lights[2].classList.remove("trafficLight-light--active");
-    setTimeout(() => setRed_redRoll(lights, isPed), 1000);
+    if(iterations < 1) return
+    setTimeout(() => setRed_Roll(lights, isPed, iterations-1), 1000);
 }
-function setRed_redRoll(lights,  isPed){
-    lights[0].classList.add("trafficLight-light--active");    
-    lights[1].classList.remove("trafficLight-light--active");
+function setRed_Roll(lights,  isPed, iterations){
+    lights[0].classList.add("trafficLight-light--active");  
+    if(isPed){
+        lights[1].classList.add("trafficLight-light--active");
+    }else{
+        lights[1].classList.remove("trafficLight-light--active");
+    }
     lights[2].classList.remove("trafficLight-light--active");
+    if(iterations < 1) return
+    setTimeout(() => setOrangeRed_Roll(lights, isPed, iterations-1), 10000);
 }
-
+function startCar(){
+    if(state.endOfTheLine){
+        return
+    }
+    const delimeters = document.querySelectorAll(".roadDelimeter");
+    delimeters.forEach(function(delimeter) {
+        delimeter.classList.add("roadDelimeter--animated")
+    }, this);
+    const cars = document.querySelectorAll(".car");
+    cars.forEach((car) => car.classList.add("car--driving"))
+    state.isDriving = true;
+    state.startedDriving = new Date().getMilliseconds();
+    window.setTimeout(() => approachCrossing(), state.drivingTime);
+}
+function stopCar(){
+    if(state.endOfTheLine){
+        return
+    }
+    const delimeters = document.querySelectorAll(".roadDelimeter");
+    delimeters.forEach((delimeter) => delimeter.classList.remove("roadDelimeter--animated"));
+    const cars = document.querySelectorAll(".car");
+    cars.forEach((car) => car.classList.remove("car--driving"))
+    const ts = new Date().getMilliseconds();
+    state.isDriving = false;
+    state.drivingTime = state.drivingTime - ts + state.startedDriving;
+}
+function approachCrossing(){
+    if(!state.isDriving){
+        return;
+    }
+    stopCar();
+    state.endOfTheLine = true;
+    const cars = document.querySelectorAll(".car");
+    cars.forEach((car) => {
+        car.classList.add("car--driving");
+        car.classList.add("car--drivingToHalt");
+    })
+    const foreground = document.querySelector(".foreground");
+    foreground.classList.add("foreground--atCrossing");
+    const smallify = document.querySelector(".smallify");
+    smallify.classList.add("smallify--appear");
+    const appearingLight = smallify.querySelector(".trafficLight");
+    const lights = appearingLight.querySelectorAll(".trafficLight-light");
+    window.setTimeout(() => 
+        setOrangeRed_Roll(lights, false, 1)
+    , 5000);
+}
 (function init(){
     window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keyup", handleKeyUp);
     document.getElementById("crossOverRevealAction").addEventListener("click", revealCrossover)
     document.getElementById("crossOverAllLights").addEventListener("click", crossOverAllLights)
 })()

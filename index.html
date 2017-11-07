@@ -9,6 +9,7 @@
   <link href="styles/slides.css" rel="stylesheet">
   <link href="styles/crossing.css" rel="stylesheet">
   <link href="styles/trafficLight.css" rel="stylesheet">
+  <link href="styles/driving.css" rel="stylesheet">
 </head>
 
 <body>
@@ -83,7 +84,7 @@
                 <div class="trafficLight-light trafficLight-light--active">
                     <img class="dude" src="resources/dude.svg"/>
                 </div>
-                <div class="trafficLight-light">
+                <div class="trafficLight-light trafficLight-light--active">
                     <img class="dude" src="resources/dude.svg"/>
                 </div>
                 <div class="trafficLight-light">
@@ -99,7 +100,7 @@
             <div class="crossOverBox-indicator" id="crossOverAllLightsIndicator"></div>
         </div>
     </div>
-    <div class="slide" id="slide_10">
+    <div class="slide slide--noflex" id="slide_10">
         <div class="smallify">
             <div class="trafficLight">
                 <div class="trafficLight-light trafficLight-light--active"></div>
@@ -110,7 +111,7 @@
                 <div class="trafficLight-light trafficLight-light--active">
                     <img class="dude" src="resources/dude.svg"/>
                 </div>
-                <div class="trafficLight-light">
+                <div class="trafficLight-light trafficLight-light--active">
                     <img class="dude" src="resources/dude.svg"/>
                 </div>
                 <div class="trafficLight-light">
@@ -118,7 +119,33 @@
                 </div>
             </div>
         </div>
-        
+        <div class="scene">
+            <div class="foreground">
+                <div class="endRoad"></div>
+                <div class="road">
+                    <svg width="20px" height="200vh" viewBox="0 0 20 3000" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <!-- Generator: Sketch 46.1 (44463) - http://www.bohemiancoding.com/sketch -->
+                        <title>delimiter</title>
+                        <desc>Hardskreva.</desc>
+                        <defs></defs>
+                        <g id="delimiter" stroke="none" stroke-width="15" stroke-dasharray="250, 75" fill="none" fill-rule="evenodd">
+                            <path d="M 10 0 L 10 3000" class="roadDelimeter" id="Shape" fill="#ee4" stroke="#ee4" fill-rule="nonzero">
+                            </path>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+        </div>
+        <img src="resources/bilFraBak.png" class="car"/>
+    </div>
+    <div class="slide slide--inFocus" id="slide_11">
+        <img class="crossing crossing--summary" src="resources/crossing.svg">
+        <div class="trafficLight trafficLight-summary">
+            <div class="trafficLight-light"></div>
+            <div class="trafficLight-light trafficLight-light--active"></div>
+            <div class="trafficLight-light"></div>
+        </div>
+        <img src="resources/bilFraBak.png" class="car--summary"/>
     </div>
   <script src="presentasjon.js"></script>
 </body>

@@ -1,10 +1,10 @@
 .crossing{
-    width: 170px;
-    height: 170px;
+    width: 17vw;
+    height: 17vw;
 }
 .crossing--closeup{
     width: 60vw;
-    height: 80vh;
+    height: 60vw;
 }
 .crossing--onCrossroads{
     position: absolute;
@@ -26,32 +26,25 @@
     opacity: 0;
 }
 .crossing.crossing--onCrossroads:nth-child(4n) {
-    transform: translate3d(150px, 0, 0);
+    transform: translate3d(16vw, 0, 0);
 }
 .crossing.crossing--onCrossroads:nth-child(4n + 1) {
-    transform: translate3d(0, 150px, 0) rotate(90deg);
+    transform: translate3d(0, 16vw, 0) rotate(90deg);
 }
 .crossing.crossing--onCrossroads:nth-child(4n + 2) {
-    transform: translate3d(-150px, 0, 0);
+    transform: translate3d(-16vw, 0, 0);
 }
 .crossing.crossing--onCrossroads:nth-child(4n + 3) {
-    transform: translate3d(0, -150px, 0) rotate(90deg);
+    transform: translate3d(0, -16vw, 0) rotate(90deg);
 }
 .crossing-overlay {
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate3d(-50%, -50%, 0);
-    width: 170px;
-    height: 170px;
+    width: 17vw;
+    height: 17vw;
 }
-.road {
-    border-top: 4px solid var(--roadDelimiter);
-    border-bottom: 4px solid var(--roadDelimiter);
-    width: 20%;
-    height: 10%;
-}
-
 .animated--triggered.crossing--toRoads  {
     animation: shrinkLines 5s ease infinite;
 }
