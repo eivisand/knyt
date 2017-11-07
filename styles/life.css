@@ -1,0 +1,48 @@
+.bird{
+    width: 20px;
+    height: 20px;
+    transform: translate3d(50vw, 0, 0);
+    bottom: -20px;
+    position: absolute;
+} 
+.bird:nth-child(1){
+    transform: translate3d(40vw, 0, 0);
+    bottom: -30px;
+}
+.bird:nth-child(2){
+    transform: translate3d(45vw, 0, 0);
+    bottom: -20px;
+}
+.bird:nth-child(3){
+    transform: translate3d(55vw, 0, 0);
+    bottom: -80px;
+}
+.bird:nth-child(4){
+    transform: translate3d(64vw, 0, 0);
+    bottom: -120px;
+}
+.bird:nth-child(4){
+    transform: translate3d(59vw, 0, 0);
+    bottom: -120px;
+}
+.bird--flyLeft{
+    animation: flyLeft 7s infinite;
+}
+@keyframes flyLeft {
+    to{
+        width: 1000px;
+        height: 100px;
+        transform: translate3d(-20vw, -60vh, 0);
+    }
+}
+.bird--flyRight{
+    animation-delay: 3s;
+    animation: flyRight 9s infinite;
+}
+@keyframes flyRight {
+    to{
+        width: 1000px;
+        height: 100px;
+        transform: translate3d(90vw, -60vh, 0);
+    }
+}

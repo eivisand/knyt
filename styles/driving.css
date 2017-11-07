@@ -1,3 +1,11 @@
+.background { 
+    position: absolute;
+    height: calc(50vh - 2px);
+    width: 100%;
+    top: 0;
+    overflow: hidden;
+    perspective: 500vh;
+}
 .scene { 
     position: absolute;
     height: 50vh;
@@ -6,6 +14,7 @@
     border-top: 2px solid #fff;
     overflow: hidden;
     perspective: 500vh;
+    background-color: #163;
 }
 .foreground {
     transition: transform 5s ease-out;

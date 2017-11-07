@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.1 (44463) - http://www.bohemiancoding.com/sketch -->
+    <title>delimiter</title>
+    <desc>Hardskreva.</desc>
+    <defs></defs>
+    <g id="delimiter" stroke="none" stroke-width="7" fill="none" fill-rule="evenodd">
+        <path d="M 0 60 C 25 25, 25 25, 50 50 C 75 25, 75 25, 100 60 " id="Shape" stroke="#000" fill-rule="nonzero">
+             <animate dur="1.5s" repeatCount="indefinite" attributeName="d"
+                   values="
+                    M 0 10 C 25 60, 25 60, 50 50 C 75 60 75 60 100 10;
+                    M 0 60 C 25 25, 25 25, 50 50 C 75 25, 75 25, 100 60;
+                    M 0 10 C 25 60, 25 60, 50 50 C 75 60 75 60 100 10;
+                    "
+                   >
+          </animate>
+        </path>
+    </g>
+</svg>
