@@ -1,7 +1,6 @@
 .trafficLight {
     height: 80vh;
     width: 30vh;
-    border: 5px solid #fff;
     background: #222;
     display: flex;
     justify-content: space-around;
@@ -38,7 +37,6 @@
 .smallify .trafficLight {
     height: 16vh;
     width: 6vh;
-    border: 1px solid #fff;
     padding-bottom: 0.4vh;
     padding-top: 0.4vh;
     margin-left: 1vh;
