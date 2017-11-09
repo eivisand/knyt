@@ -58,14 +58,26 @@ function handleJumpedFrom(element){
     if(element.classList.contains("cycleLight") || element.classList.contains("cycleRight")){
         breakCycle(element);
     }
+    var animated = element.querySelector(".animated");
+    if(!animated){
+        return;
+    }
+    if(animated.dataset.idle){
+        animated.src = `${animated.dataset.idle}`;
+        animated.classList.remove("animated--triggered");
+    }
 }
 function triggerAnimation(element){
     var animated = element.querySelector(".animated");
     if(!animated){
         return;
     }
-    console.log(animated);
-    animated.src = `${animated.src}?${new Date().getTime()}`;
+    if(animated.dataset.active){
+        animated.src = `${animated.dataset.active}`;
+    }
+    else{
+        animated.src = `${animated.src}?${new Date().getTime()}`;
+    }
     animated.classList.add("animated--triggered");
 }
 function startLightCycle(element, includeExtraOrange){

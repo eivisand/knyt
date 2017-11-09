@@ -19,7 +19,11 @@
         <img class="crossing crossing--closeup" src="resources/crossing.svg">
     </div>
     <div class="slide animate" id="slide_2">
-        <img class="crossing crossing--closeup crossing--toRoads animated" src="resources/crossingToRoads.svg">
+        <img 
+            class="crossing crossing--closeup crossing--toRoads animated" 
+            src="resources/crossing.svg" 
+            data-active="resources/crossingToRoads.svg" 
+            data-idle="resources/crossing.svg">
     </div>
     <div class="slide" id="slide_3">
         <img class="crossing crossing--closeup crossing--toRoads animated" src="resources/crossRoads.svg">
@@ -102,31 +106,64 @@
         </div>
     </div>
     <div class="slide slide--noflex" id="slide_10">
-        <div class="smallify">
-            <div class="trafficLight">
-                <div class="trafficLight-light trafficLight-light--active"></div>
-                <div class="trafficLight-light"></div>
-                <div class="trafficLight-light"></div>
-            </div>
-            <div class="trafficLight trafficLight--ped">
-                <div class="trafficLight-light trafficLight-light--active">
-                    <img class="dude" src="resources/dude.svg"/>
-                </div>
-                <div class="trafficLight-light trafficLight-light--active">
-                    <img class="dude" src="resources/dude.svg"/>
-                </div>
-                <div class="trafficLight-light">
-                    <img class="dude" src="resources/dude.svg"/>
-                </div>
-            </div>
-        </div>
+        
         <div class="background">
+            <svg height="0" width="0">
+                <defs>
+                    <clipPath id="cloudPath">
+                        <path fill="#FFFFFF" stroke="#000000" stroke-width="1.5794" stroke-miterlimit="10" d="M215,100.3c97.8-32.6,90.5-71.9,336-77.6
+                    c92.4-2.1,98.1,81.6,121.8,116.4c101.7,149.9,53.5,155.9,14.7,178c-96.4,54.9,5.4,269-257,115.1c-57-33.5-203,46.3-263.7,20.1
+                    c-33.5-14.5-132.5-45.5-95-111.1C125.9,246.6,98.6,139.1,215,100.3z">
+                    <animate dur="1s" repeatCount="indefinite" attributeName="clipPath"
+                    values="
+                     M215,100.3c95.8-35.6,90.5-77.9,336-70.6
+             c92.4-2.1,98.1,81.6,121.8,116.4c101.7,129.9,53.5,165.9,14.7,178c-96.4,54.9,5.4,269-227,115.1c-57-33.5-203,46.3-263.7,20.1
+             c-33.5-14.5-132.5-45.5-95-111.1C125.9,246.6,98.6,139.1,215,100.3z;
+                     M215,100.3c97.8-32.6,90.5-71.9,336-77.6
+             c92.4-2.1,98.1,81.6,121.8,116.4c101.7,149.9,53.5,155.9,14.7,178c-96.4,54.9,5.4,269-257,115.1c-57-33.5-203,46.3-263.7,20.1
+             c-33.5-14.5-132.5-45.5-95-111.1C125.9,246.6,98.6,139.1,215,100.3z;
+                                 M215,100.3c95.8-35.6,90.5-77.9,336-70.6
+             c92.4-2.1,98.1,81.6,121.8,116.4c101.7,129.9,53.5,165.9,14.7,178c-96.4,54.9,5.4,269-227,115.1c-57-33.5-203,46.3-263.7,20.1
+             c-33.5-14.5-132.5-45.5-95-111.1C125.9,246.6,98.6,139.1,215,100.3z;
+                    ">
+                    </animate>
+                    </path>
+                    </clipPath>
+                </defs>
+            </svg>
+            <div class="cloud">
+                <img src="resources/skiez.jpg" class="cloudTexture"/>
+            </div>
+            <div class="cloud cloud--smaller">
+                <img src="resources/skiez.jpg" class="cloudTexture"/>
+            </div>
+            <div class="cloud cloud--quicker">
+                <img src="resources/skiez.jpg" class="cloudTexture"/>
+            </div>
                 <img src="resources/bird.svg" class="bird bird--flyLeft"/>
                 <img src="resources/bird.svg" class="bird bird--flyLeft"/>
                 <img src="resources/bird.svg" class="bird bird--flyRight"/>
                 <img src="resources/bird.svg" class="bird bird--flyRight"/>
                 <img src="resources/bird.svg" class="bird bird--flyRight"/>
             </div>
+            <div class="smallify">
+                    <div class="trafficLight">
+                        <div class="trafficLight-light trafficLight-light--active"></div>
+                        <div class="trafficLight-light"></div>
+                        <div class="trafficLight-light"></div>
+                    </div>
+                    <div class="trafficLight trafficLight--ped">
+                        <div class="trafficLight-light trafficLight-light--active">
+                            <img class="dude" src="resources/dude.svg"/>
+                        </div>
+                        <div class="trafficLight-light trafficLight-light--active">
+                            <img class="dude" src="resources/dude.svg"/>
+                        </div>
+                        <div class="trafficLight-light">
+                            <img class="dude" src="resources/dude.svg"/>
+                        </div>
+                    </div>
+                </div>
         <div class="scene">
             <div class="foreground">
                 <div class="endRoad"></div>

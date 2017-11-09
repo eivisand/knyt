@@ -46,3 +46,54 @@
         transform: translate3d(90vw, -60vh, 0);
     }
 }
+.cloud {
+    clip-path: url(#cloudPath);
+    width: 55vh;
+    height: 38vh;
+    background: #fff;
+    transform: translate3d(-55vh, 0vw, 0);
+    animation: cloud 40s infinite;
+    position: absolute;
+}
+.cloud--smaller {
+    transform: translate3d(-70vh, 10vh, 0) scale(0.6);
+    animation-delay: 7s;
+    animation: cloud--smaller 30s infinite;
+}
+.cloud--quicker {
+    transform: translate3d(-55vh, 5vh, 0) scale(0.8);
+    animation-delay: 3s;
+    animation: cloud--quicker 20s infinite;
+}
+@keyframes cloud {
+    to{
+        transform: translate3d(120vw, -20vh, 0);
+    }
+}
+@keyframes cloud--smaller {
+    to{
+        transform: translate3d(110vw, -10vh, 0) scale(0.7);
+    }
+}
+@keyframes cloud--quicker {
+    to{
+        transform: translate3d(120vw, -10vh, 0) scale(0.9);
+    }
+}
+.cloudTexture {
+    position: absolute;
+    width: 400%;
+    height: auto;
+    animation: rollTexture 50s infinite linear;
+}
+@keyframes rollTexture {
+    to{
+        transform: translate3d(-66%, 0, 0);
+    }
+}
+.cloud--smaller .cloudTexture {
+    animation-delay: 20s;
+}
+.cloud--quicker .cloudTexture {
+    animation-delay: 30s;
+}

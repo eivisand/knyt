@@ -1,10 +1,14 @@
 .crossing{
     width: 17vw;
     height: 17vw;
+    max-height: 22.6666666667vh;
+    max-width: 22.6666666667vw;
 }
 .crossing--closeup{
     width: 60vw;
     height: 60vw;
+    max-height: 80vh;
+    max-width: 80vw;
 }
 .crossing--onCrossroads{
     position: absolute;
@@ -44,6 +48,7 @@
     transform: translate3d(-50%, -50%, 0);
     width: 17vw;
     height: 17vw;
+    max-height: 22.6666666667vh;
 }
 .animated--triggered.crossing--toRoads  {
     animation: shrinkLines 5s ease infinite;
