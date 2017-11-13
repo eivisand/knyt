@@ -4,6 +4,7 @@ let state = {
     allwaysTrue: true,
     drivingTime: 7000,
     isDriving: false,
+    carPosX: 0,
 }
 
 let handleKeyDown = (event) => {
@@ -17,6 +18,12 @@ let handleKeyDown = (event) => {
         case 87:
             startCar();
             return;
+        case 65:
+            startTurn(-1);
+            return;
+        case 68:
+            startTurn(1);
+            return;
     }
     console.log(event);
 }
@@ -24,6 +31,12 @@ let handleKeyUp = (event) => {
     switch(event.keyCode){
         case 87:
             stopCar();
+            return;
+        case 65:
+            stopTurn();
+            return;
+        case 68:
+            stopTurn();
             return;
     }
     console.log(event);
@@ -106,7 +119,7 @@ function setOrangeRed(lights, continueIndicator, includeExtraOrange){
         setTimeout(() => setGreen(lights, continueIndicator, includeExtraOrange ), 1000);
     }
 }
-function setOrange(lights, continueIndicator, includeExtraOrange, ){
+function setOrange(lights, continueIndicator, includeExtraOrange){
     lights[0].classList.remove("trafficLight-light--active");
     lights[1].classList.add("trafficLight-light--active");
     lights[2].classList.remove("trafficLight-light--active");
@@ -114,7 +127,7 @@ function setOrange(lights, continueIndicator, includeExtraOrange, ){
         setTimeout(() => setRed(lights, continueIndicator, includeExtraOrange), 1000);
     }
 }
-function setGreen(lights, continueIndicator, includeExtraOrange, ){
+function setGreen(lights, continueIndicator, includeExtraOrange){
     lights[0].classList.remove("trafficLight-light--active");
     lights[1].classList.remove("trafficLight-light--active");
     lights[2].classList.add("trafficLight-light--active");
@@ -131,11 +144,11 @@ function revealCrossover(event){
     indicator.classList.add("crossOverBox-indicator--active");
     const light = document.getElementById("crossOverRevealLight");
     const lights = light.querySelectorAll(".trafficLight-light");
-    
+
     window.setTimeout(() => lights[1].classList.add("trafficLight-light--active"), 5000)
     window.setTimeout(() => {
-        lights[1].classList.remove("trafficLight-light--active"); 
-        lights[2].classList.add("trafficLight-light--active"); 
+        lights[1].classList.remove("trafficLight-light--active");
+        lights[2].classList.add("trafficLight-light--active");
         indicator.classList.remove("crossOverBox-indicator--active");
     }, 6000)
 }
@@ -143,8 +156,8 @@ function crossOverAllLights(event){
     const indicator = document.getElementById("crossOverAllLightsIndicator");
     indicator.classList.add("crossOverBox-indicator--active");
     const trafficLights = document.querySelectorAll(".trafficLight.crossoverAll");
-    
-    trafficLights.forEach((trafficLight) => 
+
+    trafficLights.forEach((trafficLight) =>
         rollToGreen(trafficLight.querySelectorAll(".trafficLight-light"), trafficLight.classList.contains("trafficLight--ped")
     )
     , this);
@@ -163,18 +176,24 @@ function setOrangeRed_Roll(lights,  isPed, iterations){
     setTimeout(() => setGreen_Roll(lights, isPed, iterations-1), 1000);
 }
 function setGreen_Roll(lights,  isPed, iterations){
-    lights[0].classList.remove("trafficLight-light--active");    
+    lights[0].classList.remove("trafficLight-light--active");
     lights[1].classList.remove("trafficLight-light--active");
     lights[2].classList.add("trafficLight-light--active");
+    if(isPed){
+      startWalking(lights[2]);
+    }
     if(iterations < 1) return
-    setTimeout(() => setOrange_Roll(lights, isPed, iterations-1), 10000);
+    setTimeout(() => {setOrange_Roll(
+      lights, isPed, iterations-1);
+      stopWalking(lights[2]);
+    }, 10000);
 }
 function setOrange_Roll(lights,  isPed, iterations){
     if(isPed){
-        lights[0].classList.add("trafficLight-light--active");    
+        lights[0].classList.add("trafficLight-light--active");
         lights[1].classList.add("trafficLight-light--active");
     } else{
-        lights[0].classList.remove("trafficLight-light--active");    
+        lights[0].classList.remove("trafficLight-light--active");
         lights[1].classList.add("trafficLight-light--active");
     }
     lights[2].classList.remove("trafficLight-light--active");
@@ -182,7 +201,7 @@ function setOrange_Roll(lights,  isPed, iterations){
     setTimeout(() => setRed_Roll(lights, isPed, iterations-1), 1000);
 }
 function setRed_Roll(lights,  isPed, iterations){
-    lights[0].classList.add("trafficLight-light--active");  
+    lights[0].classList.add("trafficLight-light--active");
     if(isPed){
         lights[1].classList.add("trafficLight-light--active");
     }else{
@@ -191,6 +210,14 @@ function setRed_Roll(lights,  isPed, iterations){
     lights[2].classList.remove("trafficLight-light--active");
     if(iterations < 1) return
     setTimeout(() => setOrangeRed_Roll(lights, isPed, iterations-1), 10000);
+}
+function startWalking(light){
+  const dude = light.querySelector('img');
+  dude.src = "resources/dudeWalking.svg";
+}
+function stopWalking(light){
+  const dude = light.querySelector('img');
+  dude.src = "resources/dude.svg";
 }
 function startCar(){
     if(state.endOfTheLine){
@@ -235,9 +262,28 @@ function approachCrossing(){
     smallify.classList.add("smallify--appear");
     const appearingLight = smallify.querySelector(".trafficLight");
     const lights = appearingLight.querySelectorAll(".trafficLight-light");
-    window.setTimeout(() => 
+    window.setTimeout(() =>
         setOrangeRed_Roll(lights, false, 1)
-    , 5000);
+    , 8000);
+}
+function startTurn(modifier) {
+  if(state.currentTurnModifier === modifier) return;
+  state.currentTurnModifier = modifier;
+  const carBox = document.querySelector(".carContainer");
+  turn(carBox, modifier);
+}
+function stopTurn() {
+  state.currentTurnModifier = 0;
+}
+function turn(carBox, modifier) {
+  if(state.currentTurnModifier !== modifier || !carBox) {
+    return;
+  }
+  state.carPosX += modifier * 25;
+  carBox.style.transform = `translate3d(${state.carPosX}px, 0, 0)`;
+  window.setTimeout(() =>
+      turn(carBox, modifier)
+  , 150);
 }
 (function init(){
     window.addEventListener("keydown", handleKeyDown);

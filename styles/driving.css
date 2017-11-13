@@ -1,4 +1,4 @@
-.background { 
+.background {
     position: absolute;
     height: calc(50vh - 2px);
     width: 100%;
@@ -6,7 +6,7 @@
     overflow: hidden;
     perspective: 500vh;
 }
-.scene { 
+.scene {
     position: absolute;
     height: 50vh;
     width: 100%;
@@ -79,17 +79,22 @@
     width: 45vw;
     transform: translateX(49vw);
 }
-
+.carContainer {
+  position: absolute;
+  bottom: 0;
+  width: 45vw;
+  transition: transform 0.15s linear;
+}
 .car--driving {
     animation: drive 2s infinite;
 }
 .car--drivingToHalt {
     animation: halt 5s 1;
-    transform: translateX(47vw) rotate(0deg);
+    transform: translateX(49vw) rotate(0deg);
 }
 @keyframes drive {
     0%{
-        transform: translateX(49vw)rotate(0deg);
+        transform: translateX(49vw) rotate(0deg);
     }
     33%{
         transform: translateX(49vw) rotate(7deg);
@@ -98,12 +103,12 @@
         transform: translateX(49vw) rotate(-7deg);
     }
     100%{
-        transform: translateX(49vw)rotate(0deg);
+        transform: translateX(49vw) rotate(0deg);
     }
 }
 @keyframes halt {
     0%{
-        transform: translateX(49vw)rotate(0deg);
+        transform: translateX(49vw) rotate(0deg);
     }
     20%{
         transform: translateX(49vw) rotate(7deg);
@@ -112,18 +117,18 @@
         transform: translateX(49vw) rotate(-7deg);
     }
     60%{
-        transform: translateX(48vw)rotate(0deg);
+        transform: translateX(49vw) rotate(0deg);
     }
     70%{
-        transform: translateX(48vw)rotate(3deg);
+        transform: translateX(49vw)rotate(3deg);
     }
     80%{
-        transform: translateX(48vw)rotate(0deg);
+        transform: translateX(49vw)rotate(0deg);
     }
     90%{
-        transform: translateX(47vw)rotate(-3deg);
+        transform: translateX(49vw)rotate(-3deg);
     }
     100%{
-        transform: translateX(47vw) rotate(0deg);
+        transform: translateX(49vw) rotate(0deg);
     }
 }
