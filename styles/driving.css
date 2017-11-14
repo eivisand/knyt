@@ -72,6 +72,17 @@
         stroke-dashoffset: -975;
     }
 }
+.roadDelimeter--animatedRev {
+    animation: rollRev linear 4s infinite;
+}
+@keyframes rollRev {
+    from{
+      stroke-dashoffset: -975;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+}
 
 .car {
     position: absolute;

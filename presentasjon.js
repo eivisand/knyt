@@ -5,6 +5,7 @@ let state = {
     drivingTime: 7000,
     isDriving: false,
     carPosX: 0,
+    approachCrossingTimeout: null,
 }
 
 let handleKeyDown = (event) => {
@@ -18,6 +19,9 @@ let handleKeyDown = (event) => {
         case 87:
             startCar();
             return;
+        case 83:
+            reverseCar();
+            return;
         case 65:
             startTurn(-1);
             return;
@@ -30,6 +34,9 @@ let handleKeyDown = (event) => {
 let handleKeyUp = (event) => {
     switch(event.keyCode){
         case 87:
+            stopCar();
+            return;
+        case 83:
             stopCar();
             return;
         case 65:
@@ -220,7 +227,7 @@ function stopWalking(light){
   dude.src = "resources/dude.svg";
 }
 function startCar(){
-    if(state.endOfTheLine){
+    if(state.endOfTheLine || (state.isDriving && !state.isReversing)){
         return
     }
     const delimeters = document.querySelectorAll(".roadDelimeter");
@@ -230,23 +237,44 @@ function startCar(){
     const cars = document.querySelectorAll(".car");
     cars.forEach((car) => car.classList.add("car--driving"))
     state.isDriving = true;
-    state.startedDriving = new Date().getMilliseconds();
-    window.setTimeout(() => approachCrossing(), state.drivingTime);
+    state.isReversing = false;
+    state.startedDriving = Date.now();
+    state.approachCrossingTimeout = window.setTimeout(() => approachCrossing(), state.drivingTime);
+}
+function reverseCar() {
+  if(state.endOfTheLine || (state.isDriving && state.isReversing)){
+      return
+  }
+  const delimeters = document.querySelectorAll(".roadDelimeter");
+  delimeters.forEach(function(delimeter) {
+      delimeter.classList.add("roadDelimeter--animatedRev")
+  }, this);
+  const cars = document.querySelectorAll(".car");
+  cars.forEach((car) => car.classList.add("car--driving"))
+  state.isDriving = true;
+  state.isReversing = true;
+  state.startedDriving = Date.now();
 }
 function stopCar(){
     if(state.endOfTheLine){
         return
     }
+    window.clearTimeout(state.approachCrossingTimeout);
     const delimeters = document.querySelectorAll(".roadDelimeter");
-    delimeters.forEach((delimeter) => delimeter.classList.remove("roadDelimeter--animated"));
+    delimeters.forEach((delimeter) => {
+      delimeter.classList.remove("roadDelimeter--animated");
+      delimeter.classList.remove("roadDelimeter--animatedRev");
+  });
     const cars = document.querySelectorAll(".car");
     cars.forEach((car) => car.classList.remove("car--driving"))
-    const ts = new Date().getMilliseconds();
+    const ts = Date.now();
     state.isDriving = false;
-    state.drivingTime = state.drivingTime - ts + state.startedDriving;
+    direction = state.isReversing ? 1 : -1;
+    state.drivingTime = state.drivingTime + direction * (ts - state.startedDriving);
+    state.isReversing = false;
 }
 function approachCrossing(){
-    if(!state.isDriving){
+    if(!state.isDriving || state.isReversing){
         return;
     }
     stopCar();
