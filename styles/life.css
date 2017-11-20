@@ -5,23 +5,23 @@
     bottom: -20px;
     position: absolute;
 }
-.bird:nth-child(1){
+.bird:nth-child(5n + 1){
     transform: translate3d(40vw, 0, 0);
     bottom: -30px;
 }
-.bird:nth-child(2){
+.bird:nth-child(5n + 2){
     transform: translate3d(45vw, 0, 0);
     bottom: -20px;
 }
-.bird:nth-child(3){
+.bird:nth-child(5n + 3){
     transform: translate3d(55vw, 0, 0);
     bottom: -80px;
 }
-.bird:nth-child(4){
+.bird:nth-child(5n + 4){
     transform: translate3d(64vw, 0, 0);
     bottom: -120px;
 }
-.bird:nth-child(4){
+.bird:nth-child(5n + 4){
     transform: translate3d(59vw, 0, 0);
     bottom: -120px;
 }
