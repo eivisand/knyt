@@ -4,7 +4,7 @@
     transform: translate3d(50vw, 0, 0);
     bottom: -20px;
     position: absolute;
-} 
+}
 .bird:nth-child(1){
     transform: translate3d(40vw, 0, 0);
     bottom: -30px;
@@ -48,20 +48,20 @@
 }
 .cloud {
     clip-path: url(#cloudPath);
-    width: 55vh;
-    height: 38vh;
+    width: 103vh;
+    height: 67vh;
     background: #fff;
-    transform: translate3d(-55vh, 0vw, 0);
+    transform: translate3d(-91vh, -14vw, 0) scale(0.6);
     animation: cloud 40s infinite;
     position: absolute;
 }
 .cloud--smaller {
-    transform: translate3d(-70vh, 10vh, 0) scale(0.6);
+    transform: translate3d(-70vh, -41vh, 0) scale(0.4);
     animation-delay: 7s;
     animation: cloud--smaller 30s infinite;
 }
 .cloud--quicker {
-    transform: translate3d(-55vh, 5vh, 0) scale(0.8);
+    transform: translate3d(-55vh, -15vh, 0) scale(0.5);
     animation-delay: 3s;
     animation: cloud--quicker 20s infinite;
 }
