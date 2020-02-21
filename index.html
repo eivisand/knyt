@@ -7,194 +7,138 @@
   <meta name="author" content="!win">
   <meta name="description" content="presentasjon av skit i trafikk">
   <link href="styles/slides.css" rel="stylesheet">
-  <link href="styles/crossing.css" rel="stylesheet">
-  <link href="styles/trafficLight.css" rel="stylesheet">
-  <link href="styles/driving.css" rel="stylesheet">
-  <link href="styles/life.css" rel="stylesheet">
 </head>
 
 <body>
 
-    <div class="slide slide--inFocus" id="slide_1">
-        <img class="crossing crossing--closeup" src="resources/crossing.svg">
+  <div class="slide slide--inFocus" id="slide_1">
+    <div>
+        <h1>Do all your renders spark joy?</h1>
+        <p>Debugging react with why-did-you-render</p>
     </div>
-    <div class="slide animate" id="slide_2">
-        <img
-            class="crossing crossing--closeup crossing--toRoads animated"
-            src="resources/crossing.svg"
-            data-active="resources/crossingToRoads.svg"
-            data-idle="resources/crossing.svg">
+  </div>
+  <div class="slide" id="slide_2">
+    <div class="slideContent">
+      <h1>Content</h1>
+      <ul>
+        <li>Easy mistakes to make in react</li>
+        <li>Why the mistakes cause trouble</li>
+        <li>How why-did-you-render helps</li>
+        <li>How do I use why-did-you-render</li>
+      </ul>
     </div>
-    <div class="slide" id="slide_3">
-        <img class="crossing crossing--closeup crossing--toRoads animated" src="resources/crossRoads.svg">
-        <div class="crossing-overlay">
-            <img class="crossing crossing--onCrossroads crossing--fadein" src="resources/crossing.svg">
-            <img class="crossing crossing--onCrossroads crossing--fadein" src="resources/crossing.svg">
-            <img class="crossing crossing--onCrossroads crossing--fadein" src="resources/crossing.svg">
-            <img class="crossing crossing--onCrossroads crossing--fadein" src="resources/crossing.svg">
-        </div>
+  </div>
+  <div class="slide" id="slide_3">
+    <div class="slideContent">
+      <h1>Easy mistakes to make</h1>
+      <h2>Creating objects in props</h2>
+      <code>
+        <pre>
+&lt<span class="code--componentName">MyRerenderingComponent</span>
+  <span class="code--propName">myDerpProp</span><span class="code--operation">=</span>{{}} /&gt
+</pre>
+      </code>
+      <h2>Creating functions in render</h2>
+      <code>
+        <pre>
+<span class="code--operation">function</span> <span class="code--propName">MyRerenderingComponentContainer</span>(<span class="code--prop">props</span>) {
+  <span class="code--operation">const</span> <span class="code--propName">onClick</span> <span class="code--operation">=</span> (<span class="code--prop">event</span>) <span class="code--operation">=></span> props.<span class="code--propName">onClick</prop>(<span class="code--prop">event</span>)
+  <span class="code--operation">return</span> (
+    &lt<span class="code--componentName">MyRerenderingComponent</span>
+      <span class="code--propName">onClick</span><span class="code--operation"> = </span>{<span class="code--prop">onClick</span>} /&gt
+  );
+}
+</pre>
+      </code>
     </div>
-    <div class="slide" id="slide_4">
-        <img class="crossing crossing--closeup crossing--toRoads animated" src="resources/crossRoads.svg">
-        <div class="crossing-overlay">
-            <img class="crossing crossing--onCrossroads crossing--fadeout" src="resources/crossing.svg">
-            <img class="crossing crossing--onCrossroads" src="resources/crossing.svg">
-            <img class="crossing crossing--onCrossroads" src="resources/crossing.svg">
-            <img class="crossing crossing--onCrossroads" src="resources/crossing.svg">
-        </div>
+  </div>
+  <div class="slide" id="slide_4">
+    <div class="slideContent">
+      <h1>Why the mistakes cause trouble</h1>
+      <code>
+        <pre>
+true <span class="code--operation">===</span> true <span class="code--comment">                  // true</span>
+3 <span class="code--operation">===</span> 3 <span class="code--comment">                        // true</span>
+<span class="code--string">"same string"</span> <span class="code--operation">===</span> <span class="code--string">"same string"</span> <span class="code--comment">// true</span>
+[] <span class="code--operation">===</span> [] <span class="code--comment">                      // false</span>
+{} <span class="code--operation">===</span> {} <span class="code--comment">                      // false</span>
+() => true <span class="code--operation">===</span> () => true <span class="code--comment">      // false</span>
+</pre>
+      </code>
     </div>
-    <div class="slide" id="slide_5">
-        <div class="trafficLight">
-            <div class="trafficLight-light"></div>
-            <div class="trafficLight-light trafficLight-light--active"></div>
-            <div class="trafficLight-light"></div>
-        </div>
+  </div>
+  <div class="slide" id="slide_5">
+    <div class="slideContent">
+      <h1>Why the mistakes cause trouble</h1>
+      <code>
+        <pre>
+true <span class="code--operation">===</span> true <span class="code--comment">                  // true</span>
+3 <span class="code--operation">===</span> 3 <span class="code--comment">                        // true</span>
+<span class="code--string">"same string"</span> <span class="code--operation">===</span> <span class="code--string">"same string"</span> <span class="code--comment">// true</span>
+[] <span class="code--operation">===</span> [] <span class="code--comment">                      // false</span>
+{} <span class="code--operation">===</span> {} <span class="code--comment">                      // false</span>
+() => true <span class="code--operation">===</span> () => true <span class="code--comment">      // false</span>
+<span class="code--comment">//* react actually uses Object.is(),</span>
+<span class="code--comment">// the outcome is the same </span>
+</pre>
+      </code>
     </div>
-    <div class="slide cycleLight" id="slide_6">
-        <div class="trafficLight">
-            <div class="trafficLight-light"></div>
-            <div class="trafficLight-light"></div>
-            <div class="trafficLight-light"></div>
-        </div>
+  </div>
+  <div class="slide" id="slide_6">
+    <div class="slideContent">
+      <h1>How why-did-you-render helps</h1>
+      <h2>Output for the mistakes above</h2>
+      <code>
+        <pre>
+if (<span class="code--prop">process.env.NODE_ENV</span> <span class="code--operation">===</span> <span class="code--string">"development"</span>) {
+  const <span class="code--prop">whyDidYouRender</span> <span class="code--operation">=</span> require(<span class="code--string">"@welldone-software/why-did-you-render"</span>);
+  <span class="code--prop">whyDidYouRender</span>(<span class="code--prop">React</span>, { <span class="code--propName">trackAllPureComponents</span>: true });
+}
+</pre>
+      </code>
     </div>
-    <div class="slide cycleRight" id="slide_7">
-        <div class="trafficLight">
-            <div class="trafficLight-light"></div>
-            <div class="trafficLight-light"></div>
-            <div class="trafficLight-light"></div>
-        </div>
+  </div>
+  <div class="slide" id="slide_7">
+    <div class="slideContent">
+      <h1>How do I use why-did-you-render</h1>
+      <code>
+        <pre>
+<span class="code--operation">if</span> (<span class="code--propName">process</span>.<span class="code--propName">env</span>.<span class="code--propName">NODE_ENV</span> <span class="code--operation">===</span> <span class="code--string">"development"</span>) {
+  <span class="code--operation">const</span> <span class="code--propName">whyDidYouRender</span> <span class="code--operation">=</span> require(<span class="code--string">"@welldone-software/why-did-you-render"</span>);
+  <span class="code--propName">whyDidYouRender</span>(<span class="code--prop">React</span>, { <span class="code--propName">trackAllPureComponents</span>: true });
+}
+</pre>
+      </code>
     </div>
-    <div class="slide" id="slide_8">
-        <div class="trafficLight" id="crossOverRevealLight">
-            <div class="trafficLight-light"></div>
-            <div class="trafficLight-light"></div>
-            <div class="trafficLight-light"></div>
-        </div>
-        <div class="crossOverBox">
-            <div class="crossOverBox-button" id="crossOverRevealAction">
-                <img class="crossOverBox-button-graphix" src="resources/crossingButton.svg">
-            </div>
-            <img class="pointUp" src="resources/point.svg"/>
-            <img class="dude" src="resources/dude.svg"/>
-            <div class="crossOverBox-indicator" id="crossOverRevealIndicator"></div>
-        </div>
+  </div>
+  <div class="slide" id="slide_8">
+    <div class="slideContent">
+      <h1>Easy mistakes to fix</h1>
+      <h2>Creating objects in props</h2>
+      <code>
+        <pre>
+<span class="code--operation">const</span> derpPropDefault = {} <span class="code--comment">// declare constants outside your component</span>
+</br>
+&lt<span class="code--componentName">MyRerenderingComponent</span>
+  <span class="code--propName">myDerpProp</span><span class="code--operation"> = </span>{derpPropDefault} /&gt
+</pre>
+      </code>
+      <h2>Creating functions in render</h2>
+      <code>
+        <pre>
+<span class="code--operation">function</span> <span class="code--propName">MyRerenderingComponentContainer</span>(<span class="code--prop">props</span>) {
+  <span class="code--operation">const</span> <span class="code--propName">onClick</span> <span class="code--operation">=</span> React.useCallback(
+    (<span class="code--prop">event</span>) <span class="code--operation">=></span> props.<span class="code--propName">onClick</span>(<span class="code--prop">event</span>),
+  [props.<span class="code--propName">onClick</span>]);
+  <span class="code--operation">return</span> (
+    &lt<span class="code--componentName">MyRerenderingComponent</span>
+      <span class="code--propName">onClick</span><span class="code--operation"> = </span>{<span class="code--prop">onClick</span>} /&gt
+  );
+}
+</pre>
+      </code>
     </div>
-    <div class="slide" id="slide_9">
-        <div class="trafficLight crossoverAll">
-            <div class="trafficLight-light trafficLight-light--active"></div>
-            <div class="trafficLight-light"></div>
-            <div class="trafficLight-light"></div>
-        </div>
-        <div class="trafficLight trafficLight--ped crossoverAll">
-                <div class="trafficLight-light trafficLight-light--active">
-                    <img class="dude" src="resources/dude.svg"/>
-                </div>
-                <div class="trafficLight-light trafficLight-light--active">
-                    <img class="dude" src="resources/dude.svg"/>
-                </div>
-                <div class="trafficLight-light">
-                    <img class="dude" src="resources/dude.svg"/>
-                </div>
-            </div>
-        <div class="crossOverBox">
-            <div class="crossOverBox-button" id="crossOverAllLights">
-                <img class="crossOverBox-button-graphix" src="resources/crossingButton.svg">
-            </div>
-            <img class="pointUp" src="resources/point.svg"/>
-            <img class="dude crossOverBoxDude" src="resources/dude.svg"/>
-            <div class="crossOverBox-indicator" id="crossOverAllLightsIndicator"></div>
-        </div>
-    </div>
-    <div class="slide slide--noflex" id="slide_10">
-
-        <div class="background">
-            <svg height="0" width="0">
-                <defs>
-                    <clipPath id="cloudPath">
-                        <path fill="#FFFFFF" stroke="#000000" stroke-width="1.5794" stroke-miterlimit="10" d="M215,100.3c97.8-32.6,90.5-71.9,336-77.6
-                    c92.4-2.1,98.1,81.6,121.8,116.4c101.7,149.9,53.5,155.9,14.7,178c-96.4,54.9,5.4,269-257,115.1c-57-33.5-203,46.3-263.7,20.1
-                    c-33.5-14.5-132.5-45.5-95-111.1C125.9,246.6,98.6,139.1,215,100.3z">
-                    <animate dur="2s" repeatCount="indefinite" attributeName="d"
-                    values="
-                     M215,100.3c95.8-35.6,90.5-77.9,336-70.6
-             c92.4-2.1,98.1,81.6,121.8,116.4c101.7,129.9,53.5,165.9,14.7,178c-96.4,54.9,5.4,269-227,115.1c-57-33.5-203,46.3-263.7,20.1
-             c-33.5-14.5-132.5-45.5-95-111.1C125.9,246.6,98.6,139.1,215,100.3z;
-                     M215,100.3c97.8-32.6,90.5-71.9,336-77.6
-             c92.4-2.1,98.1,81.6,121.8,116.4c101.7,149.9,53.5,155.9,14.7,178c-96.4,54.9,5.4,269-257,115.1c-57-33.5-203,46.3-263.7,20.1
-             c-33.5-14.5-132.5-45.5-95-111.1C225.9,256.6,98.6,139.1,215,100.3z;
-                                 M215,100.3c95.8-35.6,90.5-77.9,336-70.6
-             c92.4-2.1,98.1,81.6,121.8,116.4c101.7,129.9,53.5,165.9,14.7,178c-96.4,54.9,5.4,269-227,115.1c-57-33.5-203,46.3-263.7,20.1
-             c-33.5-14.5-132.5-45.5-95-111.1C125.9,246.6,98.6,139.1,215,100.3z
-                    ">
-                    </animate>
-                    </path>
-                    </clipPath>
-                </defs>
-            </svg>
-            <div class="cloud">
-                <img src="resources/skiez.jpg" class="cloudTexture"/>
-            </div>
-            <div class="cloud cloud--smaller">
-                <img src="resources/skiez.jpg" class="cloudTexture"/>
-            </div>
-            <div class="cloud cloud--quicker">
-                <img src="resources/skiez.jpg" class="cloudTexture"/>
-            </div>
-                <img src="resources/bird.svg" class="bird bird--flyLeft"/>
-                <img src="resources/bird.svg" class="bird bird--flyLeft"/>
-                <img src="resources/bird.svg" class="bird bird--flyRight"/>
-                <img src="resources/bird.svg" class="bird bird--flyRight"/>
-                <img src="resources/bird.svg" class="bird bird--flyRight"/>
-            </div>
-            <div class="smallify">
-                    <div class="trafficLight">
-                        <div class="trafficLight-light trafficLight-light--active"></div>
-                        <div class="trafficLight-light"></div>
-                        <div class="trafficLight-light"></div>
-                    </div>
-                    <div class="trafficLight trafficLight--ped">
-                        <div class="trafficLight-light trafficLight-light--active">
-                            <img class="dude" src="resources/dude.svg"/>
-                        </div>
-                        <div class="trafficLight-light trafficLight-light--active">
-                            <img class="dude" src="resources/dude.svg"/>
-                        </div>
-                        <div class="trafficLight-light">
-                            <img class="dude" src="resources/dude.svg"/>
-                        </div>
-                    </div>
-                </div>
-        <div class="scene">
-            <div class="foreground">
-                <div class="endRoad"></div>
-                <div class="road">
-                    <svg width="20px" height="350vh" viewBox="0 0 20 5000" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                        <!-- Generator: Sketch 46.1 (44463) - http://www.bohemiancoding.com/sketch -->
-                        <title>delimiter</title>
-                        <desc>Hardskreva.</desc>
-                        <defs></defs>
-                        <g id="delimiter" stroke="none" stroke-width="15" stroke-dasharray="250, 75" fill="none" fill-rule="evenodd">
-                            <path d="M 10 0 L 10 5000" class="roadDelimeter" id="Shape" fill="#ee4" stroke="#ee4" fill-rule="nonzero">
-                            </path>
-                        </g>
-                    </svg>
-                </div>
-            </div>
-        </div>
-        <div class="carContainer">
-          <img src="resources/bilFraBak.png" class="car"/>
-        </div>
-    </div>
-    <div class="slide slide--inFocus" id="slide_11">
-        <img class="crossing crossing--summary" src="resources/crossing.svg">
-        <div class="trafficLight trafficLight-summary">
-            <div class="trafficLight-light"></div>
-            <div class="trafficLight-light trafficLight-light--active"></div>
-            <div class="trafficLight-light"></div>
-        </div>
-          <img src="resources/bilFraBak.png" class="car--summary"/>
-    </div>
+  </div>
   <script src="presentasjon.js"></script>
 </body>
-
 </html>

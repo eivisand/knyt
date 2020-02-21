@@ -46,7 +46,7 @@ let handleKeyUp = (event) => {
             stopTurn();
             return;
     }
-    console.log(event);
+    //console.log(event);
 }
 function jumpSlides(jumpBy){
     console.log(`slide_${state.currentSlideNumber+jumpBy}`);
@@ -63,7 +63,7 @@ function jumpSlides(jumpBy){
     Object.assign(state, {currentSlideNumber: state.currentSlideNumber + jumpBy, currentSlide: nextSlide})
 }
 function handleJumpedTo(element){
-    console.log(element.classList);
+    //console.log(element.classList);
     if(element.classList.contains("animate")){
         triggerAnimation(element);
     }
@@ -316,6 +316,6 @@ function turn(carBox, modifier) {
 (function init(){
     window.addEventListener("keydown", handleKeyDown);
     window.addEventListener("keyup", handleKeyUp);
-    document.getElementById("crossOverRevealAction").addEventListener("click", revealCrossover)
-    document.getElementById("crossOverAllLights").addEventListener("click", crossOverAllLights)
+   // document.getElementById("crossOverRevealAction").addEventListener("click", revealCrossover)
+    //document.getElementById("crossOverAllLights").addEventListener("click", crossOverAllLights)
 })()

@@ -2,8 +2,10 @@
     --roadDelimiter: #ab2;
 }
 body{
-    background: #324;
+    background: #222;
+    color: #fcf;
     margin: 0;
+    font-family: "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
 }
 .slide{
     width: 100%;
@@ -18,4 +20,31 @@ body{
     display: block;
     justify-content: initial;
     align-items: initial;
+}
+.slideContent {
+    display: flex;
+    flex-direction: column;
+}
+code {
+    padding: 1rem;
+    background: #455;
+    border-radius: 3px;
+}
+.code--componentName {
+    color: #bcb;
+}
+.code--prop {
+    color: #cca;
+}
+.code--propName {
+    color: #caf;
+}
+.code--operation {
+    color: #f29;
+}
+.code--comment {
+    color: #2cc;
+}
+.code--string {
+    color: #d82
 }
