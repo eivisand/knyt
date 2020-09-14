@@ -3,8 +3,9 @@
 }
 body{
     background: #393e46;
-    color: rgb(245, 181, 252);
+    color: #96f7d2;
     margin: 0;
+    font-size: 2rem;
     font-family: "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
 }
 h1 {
@@ -49,8 +50,9 @@ h1.mainTitle>span:nth-child(4n + 4) {
 .slideContent {
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
-.slideContent>img,
+.slideContent img,
 .slideContent video {
     max-height: 25vh;
 }
