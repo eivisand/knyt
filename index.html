@@ -13,122 +13,20 @@
 
   <div class="slide slide--inFocus" id="slide_1">
     <div>
-        <h1>Do all your renders spark joy?</h1>
-        <p>Debugging react with why-did-you-render</p>
+        <h1 class="slide-title">Båtmann og Kjærringa</h1>
+        <p>Jeg kan knytte skolissene</p>
     </div>
   </div>
-  <div class="slide" id="slide_2">
-    <div class="slideContent">
-      <h1>Content</h1>
-      <ul>
-        <li>Easy mistakes to make in react</li>
-        <li>Why the mistakes cause trouble</li>
-        <li>How why-did-you-render helps</li>
-        <li>How do I use why-did-you-render</li>
-      </ul>
+  <div class="slide slide--inFocus" id="slide_1">
+    <div>
+        <h1>Båtmannsknop</h1>
+        <p>Jeg kan knytte skolissene</p>
     </div>
   </div>
-  <div class="slide" id="slide_3">
-    <div class="slideContent">
-      <h1>Easy mistakes to make</h1>
-      <h2>Creating objects in props</h2>
-      <code>
-        <pre>
-&lt<span class="code--componentName">MyRerenderingComponent</span>
-  <span class="code--propName">myDerpProp</span><span class="code--operation">=</span>{{}} /&gt
-</pre>
-      </code>
-      <h2>Creating functions in render</h2>
-      <code>
-        <pre>
-<span class="code--operation">function</span> <span class="code--propName">MyRerenderingComponentContainer</span>(<span class="code--prop">props</span>) {
-  <span class="code--operation">const</span> <span class="code--propName">onClick</span> <span class="code--operation">=</span> (<span class="code--prop">event</span>) <span class="code--operation">=></span> props.<span class="code--propName">onClick</prop>(<span class="code--prop">event</span>)
-  <span class="code--operation">return</span> (
-    &lt<span class="code--componentName">MyRerenderingComponent</span>
-      <span class="code--propName">onClick</span><span class="code--operation"> = </span>{<span class="code--prop">onClick</span>} /&gt
-  );
-}
-</pre>
-      </code>
-    </div>
-  </div>
-  <div class="slide" id="slide_4">
-    <div class="slideContent">
-      <h1>Why the mistakes cause trouble</h1>
-      <code>
-        <pre>
-true <span class="code--operation">===</span> true <span class="code--comment">                  // true</span>
-3 <span class="code--operation">===</span> 3 <span class="code--comment">                        // true</span>
-<span class="code--string">"same string"</span> <span class="code--operation">===</span> <span class="code--string">"same string"</span> <span class="code--comment">// true</span>
-[] <span class="code--operation">===</span> [] <span class="code--comment">                      // false</span>
-{} <span class="code--operation">===</span> {} <span class="code--comment">                      // false</span>
-() => true <span class="code--operation">===</span> () => true <span class="code--comment">      // false</span>
-</pre>
-      </code>
-    </div>
-  </div>
-  <div class="slide" id="slide_5">
-    <div class="slideContent">
-      <h1>Why the mistakes cause trouble</h1>
-      <code>
-        <pre>
-true <span class="code--operation">===</span> true <span class="code--comment">                  // true</span>
-3 <span class="code--operation">===</span> 3 <span class="code--comment">                        // true</span>
-<span class="code--string">"same string"</span> <span class="code--operation">===</span> <span class="code--string">"same string"</span> <span class="code--comment">// true</span>
-[] <span class="code--operation">===</span> [] <span class="code--comment">                      // false</span>
-{} <span class="code--operation">===</span> {} <span class="code--comment">                      // false</span>
-() => true <span class="code--operation">===</span> () => true <span class="code--comment">      // false</span>
-<span class="code--comment">//* react actually uses Object.is(),</span>
-<span class="code--comment">// the outcome is the same </span>
-</pre>
-      </code>
-    </div>
-  </div>
-  <div class="slide" id="slide_6">
-    <div class="slideContent">
-      <h1>How why-did-you-render helps</h1>
-<img src="resources/whyDidYouRenderNotifier.png" />
-    </div>
-  </div>
-  <div class="slide" id="slide_7">
-    <div class="slideContent">
-      <h1>How do I use why-did-you-render</h1>
-      <code>
-        <pre>
-<span class="code--operation">if</span> (<span class="code--propName">process</span>.<span class="code--propName">env</span>.<span class="code--propName">NODE_ENV</span> <span class="code--operation">===</span> <span class="code--string">"development"</span>) {
-  <span class="code--operation">const</span> <span class="code--propName">whyDidYouRender</span> <span class="code--operation">=</span> require(<span class="code--string">"@welldone-software/why-did-you-render"</span>);
-  <span class="code--propName">whyDidYouRender</span>(<span class="code--prop">React</span>, { <span class="code--propName">trackAllPureComponents</span>: true });
-}
-</pre>
-      </code>
-    </div>
-  </div>
-  <div class="slide" id="slide_8">
-    <div class="slideContent">
-      <h1>Easy mistakes to fix</h1>
-      <h2>Creating objects in props</h2>
-      <code>
-        <pre>
-<span class="code--operation">const</span> derpPropDefault = {} <span class="code--comment">// declare constants outside your component</span>
-</br>
-&lt<span class="code--componentName">MyRerenderingComponent</span>
-  <span class="code--propName">myDerpProp</span><span class="code--operation"> = </span>{derpPropDefault} /&gt
-</pre>
-      </code>
-      <h2>Creating functions in render</h2>
-      <code>
-        <pre>
-<span class="code--operation">function</span> <span class="code--propName">MyRerenderingComponentContainer</span>(<span class="code--prop">props</span>) {
-  <span class="code--operation">const</span> <span class="code--propName">onClick</span> <span class="code--operation">=</span> React.useCallback(
-    (<span class="code--prop">event</span>) <span class="code--operation">=></span> props.<span class="code--propName">onClick</span>(<span class="code--prop">event</span>),
-  [props.<span class="code--propName">onClick</span>]);
-  <span class="code--operation">return</span> (
-    &lt<span class="code--componentName">MyRerenderingComponent</span>
-      <span class="code--propName">onClick</span><span class="code--operation"> = </span>{<span class="code--prop">onClick</span>} /&gt
-  );
-}
-</pre>
-      </code>
+  <div class="slide slide--inFocus" id="slide_1">
+    <div>
+        <h1>Båtmann og Kjærringa</h1>
+        <p>Jeg kan knytte skolissene</p>
     </div>
   </div>
   <script src="presentasjon.js"></script>
