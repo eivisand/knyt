@@ -8,24 +8,27 @@ body{
     font-family: "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
 }
 h1 {
-    font-size: 7rem;
+    color: #f0f696;
+}
+h1.mainTitle {
+    font-size: 8rem;
     font-weight: 700;
     letter-spacing: -1.25rem;
     isolation: isolate;
 }
-h1>span {
+h1.mainTitle>span {
     mix-blend-mode: multiply;
 }
-h1>span:nth-child(4n + 1) {
+h1.mainTitle>span:nth-child(4n + 1) {
     color: #f5b5fc;
 }
-h1>span:nth-child(4n + 2) {
+h1.mainTitle>span:nth-child(4n + 2) {
     color: #96f7d2;
 }
-h1>span:nth-child(4n + 3) {
+h1.mainTitle>span:nth-child(4n + 3) {
     color: #f0f696;
 }
-h1>span:nth-child(4n + 4) {
+h1.mainTitle>span:nth-child(4n + 4) {
     color: #fcb1b1;
 }
 
@@ -46,6 +49,19 @@ h1>span:nth-child(4n + 4) {
 .slideContent {
     display: flex;
     flex-direction: column;
+}
+.slideContent>img,
+.slideContent video {
+    max-height: 25vh;
+}
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.content--sideBySide {
+    flex-direction: row;
 }
 code {
     padding: 1rem;

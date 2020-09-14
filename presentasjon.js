@@ -1,11 +1,13 @@
 let state = {
     currentSlideNumber: 1,
-    currentSlide: document.getElementById("slide_1"),
+    currentSlide: document.querySelector(".slide"),
+    slides: document.querySelectorAll(".slide"),
     allwaysTrue: true,
     drivingTime: 7000,
     isDriving: false,
     carPosX: 0,
     approachCrossingTimeout: null,
+    currentSlideVideos: [],
 }
 
 let handleKeyDown = (event) => {
@@ -24,7 +26,6 @@ let handleKeyUp = (event) => {
         default:
             return;
     }
-    //console.log(event);
 }
 function jumpSlides(jumpBy){
     console.log(`slide_${state.currentSlideNumber+jumpBy}`);
@@ -45,12 +46,9 @@ function handleJumpedTo(element){
     if(element.classList.contains("animate")){
         triggerAnimation(element);
     }
-    if(element.classList.contains("cycleLight")){
-        startLightCycle(element, true);
-    }
-    if(element.classList.contains("cycleRight")){
-        startLightCycle(element, false);
-    }
+    stopVideos(state.currentSlideVideos)
+    state.currentSlideVideos = element.querySelectorAll("video");
+    playVideos(state.currentSlideVideos)
 }
 function handleJumpedFrom(element){
     if(element.classList.contains("cycleLight") || element.classList.contains("cycleRight")){
@@ -78,9 +76,14 @@ function triggerAnimation(element){
     }
     animated.classList.add("animated--triggered");
 }
-
+function playVideos(videos){
+    videos.forEach(video => video.play())
+}
+function stopVideos(videos){
+    videos.forEach(video => video.pause())
+}
 function letterizeTitles(){
-    const titles = document.querySelectorAll(".slide-title");
+    const titles = document.querySelectorAll(".mainTitle");
     titles.forEach(title => {
         const spans = [...title.innerText].map(character => {
             const spanText = document.createElement("span", { textContent: character })
