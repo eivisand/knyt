@@ -1,5 +1,5 @@
 let state = {
-    currentSlideNumber: 1,
+    currentSlideNumber: 0,
     currentSlide: document.querySelector(".slide"),
     slides: document.querySelectorAll(".slide"),
     allwaysTrue: true,
@@ -29,26 +29,27 @@ let handleKeyUp = (event) => {
 }
 function jumpSlides(jumpBy){
     console.log(`slide_${state.currentSlideNumber+jumpBy}`);
-    var nextSlide = document.getElementById(`slide_${state.currentSlideNumber+jumpBy}`);
+    var nextSlide = state.slides[state.currentSlideNumber+jumpBy];
     if (!nextSlide){
         console.log("no more slides");
         return;
     }
-    handleJumpedTo(nextSlide);
-    nextSlide.scrollIntoView();
+    const currentSlideVideos = handleJumpedTo(nextSlide);
     state.currentSlide.classList.remove("slide--inFocus");
     handleJumpedFrom(state.currentSlide);
     nextSlide.classList.add("slide--inFocus");
-    Object.assign(state, {currentSlideNumber: state.currentSlideNumber + jumpBy, currentSlide: nextSlide})
+    Object.assign(state, {currentSlideNumber: state.currentSlideNumber + jumpBy, currentSlide: nextSlide, currentSlideVideos})
 }
 function handleJumpedTo(element){
     //console.log(element.classList);
+    element.scrollIntoView();
     if(element.classList.contains("animate")){
         triggerAnimation(element);
     }
     stopVideos(state.currentSlideVideos)
-    state.currentSlideVideos = element.querySelectorAll("video");
-    playVideos(state.currentSlideVideos)
+    const currentSlideVideos = element.querySelectorAll("video");
+    playVideos(currentSlideVideos)
+    return currentSlideVideos;
 }
 function handleJumpedFrom(element){
     if(element.classList.contains("cycleLight") || element.classList.contains("cycleRight")){
@@ -77,6 +78,7 @@ function triggerAnimation(element){
     animated.classList.add("animated--triggered");
 }
 function playVideos(videos){
+    console.log("playing", videos)
     videos.forEach(video => video.play())
 }
 function stopVideos(videos){
@@ -97,6 +99,7 @@ function letterizeTitles(){
 
 (function init(){
     letterizeTitles();
+    handleJumpedTo(state.currentSlide)
     window.addEventListener("keydown", handleKeyDown);
     window.addEventListener("keyup", handleKeyUp);
    // document.getElementById("crossOverRevealAction").addEventListener("click", revealCrossover)
