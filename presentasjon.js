@@ -97,12 +97,20 @@ function letterizeTitles(){
     })
 }
 
+function handleTouchStart(event) {
+    if (event.clientX >= window.innerWidth/2){
+        jumpSlides(1);
+    } else {
+        jumpSlides(-1);
+    }
+}
+
 (function init(){
     letterizeTitles();
     handleJumpedTo(state.currentSlide)
     window.addEventListener("keydown", handleKeyDown);
     window.addEventListener("keyup", handleKeyUp);
-    window.addEventListener("touchstart", () => jumpSlides(1) , false);
+    window.addEventListener("touchstart", handleTouchStart, false);
    // document.getElementById("crossOverRevealAction").addEventListener("click", revealCrossover)
     //document.getElementById("crossOverAllLights").addEventListener("click", crossOverAllLights)
 })()
