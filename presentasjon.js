@@ -102,6 +102,7 @@ function letterizeTitles(){
     handleJumpedTo(state.currentSlide)
     window.addEventListener("keydown", handleKeyDown);
     window.addEventListener("keyup", handleKeyUp);
+    window.addEventListener("touchstart", () => jumpSlides(1) , false);
    // document.getElementById("crossOverRevealAction").addEventListener("click", revealCrossover)
     //document.getElementById("crossOverAllLights").addEventListener("click", crossOverAllLights)
 })()
