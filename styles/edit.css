@@ -1,0 +1,79 @@
+#filterdude{
+  width: 100%;
+  height: auto;
+}
+.filterGroup{
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.filterEdit {
+  display: flex;
+  width: 100%;
+}
+.filterEdit-input {
+  margin-left: auto;
+
+}
+body{
+  background-color: #222324;
+}
+
+.blend {
+  display: flex;
+  justify-content: center;
+  isolation: isolate;
+}
+
+.blender {
+  width: 20vw;
+  height: 20vw;
+  transform: translateX(10%);
+  background-color: #f00;
+}
+
+.blendee {
+  width: 20vw;
+  height: 20vw;
+  border-radius: 50%;
+  transform: translateX(-10%);
+  background-color: #0ff;
+}
+
+.blendee--multiply {
+  mix-blend-mode: multiply;
+}
+
+.blendee--screen {
+  mix-blend-mode: screen;
+}
+
+.cloudyContainer {
+  overflow: hidden;
+  position: relative;
+}
+
+.cloudy {
+  position: absolute;
+  will-change: transform;
+  left: 0;
+  animation-duration: 10s;
+  animation-timing-function: linear;
+  animation-name: fog;
+  animation-iteration-count: infinite;
+  z-index: -1;
+}
+
+.cloudyValley {
+  mix-blend-mode: normal;
+}
+
+@keyframes fog {
+  from {
+    transform: translateX(0%);
+    
+  }
+
+  to {
+    transform: translateX(-49.86%);
+  }
+}

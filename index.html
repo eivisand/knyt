@@ -7,24 +7,292 @@
   <meta name="author" content="!win">
   <meta name="description" content="presentasjon av skolisser">
   <link href="styles/slides.css" rel="stylesheet">
+  <link href="styles/edit.css" rel="stylesheet">
+  <link href="styles/filter.css" rel="stylesheet">
+  <link href="styles/hueRotate.css" rel="stylesheet">
 </head>
 
 <body>
-
   <div class="slide slide--inFocus">
-    <div>
-        <h1 class="mainTitle">Title</h1>
+    <div class="content">
+      <h1 class="mainTitle">Filters</h1>
+      <h1 class="mainTitle">and</h1>
+      <h1 class="mainTitle">Blend Modes</h1>
+    </div>
+
+  </div>
+  <div class="slide">
+    <div class="slideContent">
+      <h1 class="mainTitle">Filters</h1>
+      <ul>
+        <li>f(x)</li>
+      </ul>
+      <code>
+        <pre>
+<span class="code--componentName">.filtered</span> <span class="code--operation">{</span>
+  <span class="code--prop">filter</span><span class="code--operation">:</span> <span class="code--propName">foo<span class="code--operation">(</span><span class="code--string">x</span><span class="code--operation">)</span></span> <span class="code--propName">bar<span class="code--operation">(</span><span class="code--string">y</span><span class="code--operation">)</span><span class="code--operation">;</span> <span class="code--comment">/* etc... */</span></span>
+<span class="code--operation">}</span>
+      </pre>
+    </code>
     </div>
   </div>
-  <div class="slide slide--inFocus">
+  <div class="slide">
     <div class="slideContent">
-        <h1>Title</h1>
+      <h2>Filter example: brightness</h1>
+        <div class="content">
+          <code>brightness(200%) 
+          #111 -> #222</code>
+          <form class="filterEdit" oninput="amount.value=inputRange.value">
+            <span>brightness(</span>
+            <output name="amount" for="inputRange">100</output><span>%)</span>
+            <input type="range" name="inputRange" class="filterEdit-input" onInput="changeBasicBrightness(this.value)"
+              value="100" min="0" max="1600" />
+
+          </form>
+        </div>
+        <div class="content content--sideBySide">
+          <div class="filterBasic" id="filterBrightness"></div>
+          <code>
+            <span class="code--prop">background-color</span><span class="code--operation">:</span> <span class="code--propName">#111</span>
+          </code>
+        </div>
+    </div>
+  </div>
+  <div class="slide">
+    <div class="slideContent">
+      <h2>Filter example: hue-rotate</h1>
+        <code>hue-rotate(180deg) 
+          #f00 -> #0ff</code>
+        <div class="wheelContainer">
+          <div id="colorwheel">
+
+          </div>
+          <img src="resources/colorwheel.png" class="colorwheel"/>
+        
+          
+        </div>
+        <button class="clickMe clickMe--button" onClick="spin()">rotate hue</div>
+    </div>
+  </div>
+  <div class="slide">
+    <div class="slideContent">
+      <h2>Filter example: blur</h1>
         <ul>
-            <li>List item</li>
-            <li>List item</li>
-          </ul>
+          <li>
+            Weighted average of some radius of pixels
+          </li>
+        </ul>
+        <div class="content">
+          <h3>Equal weights blur with 1px radius:</h3>
+          <div class="pixelGrid">
+            <div class="pixel">10</div><div class="pixel">20</div><div class="pixel">20</div>
+            <div class="pixel">10</div><div class="pixel pixel--focus">20</div><div class="pixel">20</div>
+            <div class="pixel">10</div><div class="pixel">20</div><div class="pixel">20</div>
+          </div>
+          <code class="gridMath"> <pre>             [ 1, 1, 1 ]   [ 10, 20, 20 ]
+blur(1px) -> [ 1, 1, 1 ] * [ 10, 20, 20 ] / 9  -> 150/9 -> 17  
+             [ 1, 1, 1 ]   [ 10, 20, 20 ]</pre></code>
+          <div class="pixelGrid">
+            <div class="pixel">10</div><div class="pixel">20</div><div class="pixel">20</div>
+            <div class="pixel">10</div><div class="pixel pixel--focus">17</div><div class="pixel">20</div>
+            <div class="pixel">10</div><div class="pixel">20</div><div class="pixel">20</div>
+          </div>
+        </div>
+        <div class="content">
+          <form class="filterEdit" oninput="amount.value=inputRange.value">
+            <span>blur(</span>
+            <output name="amount" for="inputRange">0</output><span>px)</span>
+            <input type="range" name="inputRange" class="filterEdit-input" onInput="setBasicBlur(this.value)"
+              value="0" min="0" max="10" />
+          </form>
+        </div>
+        <div class="content">
+          <img class="filterBasic" id="filterBlur" src="resources/josten.jpg">
+
+        </div>
+    </div>
+  </div>
+  <div class="slide">
+    <div class="slideContent content content--sideBySide">
+      <div class="imageTarget content">
+        <img id="filterdude" src="resources/flower.jpg">
+      </div>
+      <div class="controls content">
+        <div class="filterGroup">
+          <h2>Light</h2>
+          <form class="filterEdit" oninput="amount.value=inputRange.value">
+            contrast
+            <output name="amount" for="inputRange">100</output>%
+            <input type="range" name="inputRange" class="filterEdit-input" onInput="changeContrast(this.value)"
+              value="100" min="0" max="200" />
+          </form>
+          <form class="filterEdit" oninput="amount.value=inputRange.value">
+            brightness
+            <output name="amount" for="inputRange">100</output>%
+            <input type="range" name="inputRange" class="filterEdit-input" onInput="changeBrightness(this.value)"
+              value="100" min="0" max="200" />
+          </form>
+        </div>
+        <div class="filterGroup">
+          <h2>Color</h2>
+          <form class="filterEdit" oninput="amount.value=inputRange.value">
+            sepia
+            <output name="amount" for="inputRange">0</output>%
+            <input type="range" name="inputRange" class="filterEdit-input" onInput="changeSepia(this.value)" value="0"
+              min="0" max="100" />
+          </form>
+          <form class="filterEdit" oninput="amount.value=inputRange.value">
+            invert
+            <output name="amount" for="inputRange">0</output>%
+            <input type="range" name="inputRange" class="filterEdit-input" onInput="changeInvert(this.value)" value="0"
+              min="0" max="100" />
+          </form>
+          <form class="filterEdit" oninput="amount.value=inputRange.value">
+            saturate
+            <output name="amount" for="inputRange">100</output>%
+            <input type="range" name="inputRange" class="filterEdit-input" onInput="changeSaturate(this.value)"
+              value="100" min="0" max="200" />
+          </form>
+          <form class="filterEdit" oninput="amount.value=inputRange.value">
+            rotate hue
+            <output name="amount" for="inputRange">0</output>deg
+            <input type="range" name="inputRange" class="filterEdit-input" onInput="changeHueRotate(this.value)"
+              value="0" min="0" max="360" />
+          </form>
+          <form class="filterEdit" oninput="amount.value=grayscaleRange.value">
+            grayscale
+            <output name="amount" for="grayscaleRange">0</output>%
+            <input type="range" name="grayscaleRange" class="filterEdit-input" onInput="changeGrayscale(this.value)"
+              value="0" min="0" max="100" />
+          </form>
+        </div>
+        <div class="filterGroup">
+          <h2>Extra</h2>
+          <form class="filterEdit" oninput="amount.value=blurRange.value">
+            blur
+            <output name="amount" for="blurRange">0</output>px
+            <input type="range" name="blurRange" class="filterEdit-input" onInput="changeBlur(this.value)" value="0"
+              min="0" max="20" />
+          </form>
+          <form class="filterEdit" oninput="opacityAmount.value=opacityRange.value">
+            opacity
+            <output name="opacityAmount" for="opacityRange">100</output>%
+            <input type="range" name="opacityRange" class="filterEdit-input" onInput="changeOpacity(this.value)"
+              value="100" min="0" max="100" />
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="slide">
+    <div class="slideContent">
+      <h2>Fun with filters</h2>
+      <div class="content">
+        The quickest darkmode implementation you've seen
+      </div>
+      <div class="content">
+        <code><pre><span class="code--componentName">body</span> <span class="code--operation">{</span>
+  <span class="code--prop">filter</span><span class="code--operation">:</span> <span class="code--propName">invert()</span><span class="code--operation">;</span>
+<span class="code--operation">}</span>
+<span class="code--componentName">img</span> <span class="code--operation">{</span>
+  <span class="code--prop">filter</span><span class="code--operation">:</span> <span class="code--propName">invert()</span><span class="code--operation">;</span>
+<span class="code--operation">}</span></pre></code>
+      </div>
+  </div></div>
+  <div class="slide">
+    <div class="slideContent">
+      <h1 class="mainTitle">Blend Modes</h1>
+      <div class="content">
+        f(x, y, z...)
+      </div>
+      <code>
+        <pre><span class="code--componentName">.blended</span> <span class="code--operation">{</span>
+  <span class="code--prop">mix-blend-mode</span><span class="code--operation">:</span> <span class="code--propName">foo</span><span class="code--operation">;</span>
+<span class="code--operation">}</span>
+
+<span class="code--componentName">.isolateElementsToBlend</span> <span class="code--operation">{</span>
+  <span class="code--prop">isolation</span><span class="pl-kos">:</span> <span class="code--propName">isolate</span><span class="code--operation">;</span>
+<span class="code--operation">}</span>
+
+<span class="code--componentName">.blendBackgroundStyles</span> <span class="code--operation">{</span>
+  <span class="code--prop">background-blend-mode</span><span class="pl-kos">:</span> <span class="code--propName">bar</span><span class="code--operation">;</span>
+<span class="code--operation">}</span></pre>
+              </code>
+    </div>
+  </div>
+  <div class="slide">
+    <div class="slideContent">
+      <h2>Multiply</h2>
+      <div id="blendMultiply">
+        <form onsubmit="return false">
+          <div class="content content--sideBySide">
+          <input type="color" name="blenderValue" class="blenderInput" oninput="blendMultiply(this.value); setVisibleOut(this.value, '#blenderOut')" value="#ff0000" />
+          <input type="color" name="blendeeValue" class="blendeeInput" oninput="blendMultiply(this.value); setVisibleOut(this.value, '#blendeeOut')" value="#00ffff" />
+        </div>
+        <div class="content content--sideBySide">
+          <pre><output id="blenderOut" style="color: rgba(255, 0, 0)"> rgba(255, 0, 0) </output> * <output id="blendeeOut" style="color: rgba(0, 255, 255)"> rgba(0, 255, 255) </output> = <output id="multiplyOut" style="color: rgba(0, 0, 0)"> rgba(0, 0, 0) </output></pre>
+        </div>
+        </form>
+        <div class="blend">
+          <div class="blender" id="blenderMultiply"></div>
+          <div class="blendee blendee--multiply" id="blendeeMultiply"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide">
+    <div class="slideContent">
+      <h2>Screen</h2>
+      the inverse of multiply
+      <div id="blendScreen">
+        <form onsubmit="return false">
+          <div class="content content--sideBySide">
+          <input type="color" name="blenderValue" class="blenderInput" oninput="blendScreen(this.value); setVisibleOut(this.value, '#screenerOut')" value="#ff0000" />
+          <input type="color" name="blendeeValue" class="blendeeInput" oninput="blendScreen(this.value); setVisibleOut(this.value, '#screeneeOut')" value="#00ffff" />
+        </div>
+        <div class="content content--sideBySide">
+          <pre><output id="screenerOut" style="color: rgba(255, 0, 0)"> rgba(255, 0, 0) </output> screen <output id="screeneeOut" style="color: rgba(0, 255, 255)"> rgba(0, 255, 255) </output> = <output id="screenOut" style="color: rgba(255, 255, 255)"> rgba(255, 255, 255) </output></pre>
+        </div>
+        </form>
+        <div class="blend">
+          <div class="blender" id="blenderScreen"></div>
+          <div class="blendee blendee--screen" id="blendeeScreen"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide">
+    <div class="slideContent">
+      <h2>Blend modes Demo</h2>
+      <select name="blendModes" id="blendModeSelect" class="clickMe" oninput="setBlendMode(this.value, '.cloudyValley')">
+        <option value="normal">normal</option>
+        <option value="multiply">multiply</option>
+        <option value="screen">screen</option>
+        <option value="overlay">overlay</option>
+        <option value="darken">darken</option>
+        <option value="lighten">lighten</option>
+        <option value="color-dodge">color-dodge</option>
+        <option value="color-burn">color-burn</option>
+        <option value="hard-light">hard-light</option>
+        <option value="soft-light">soft-light</option>
+        <option value="difference">difference</option>
+        <option value="exclusion">exclusion</option>
+        <option value="hue">hue</option>
+        <option value="saturation">saturation</option>
+        <option value="color">color</option>
+        <option value="luminosity">luminosity</option>
+    </select>
+      <div class="blend cloudyContainer">
+        <img src="resources/clouds2.jpg" class="cloudy">
+        <img src="resources/bandet.jpg" class="cloudyValley">
+      </div>
     </div>
   </div>
   <script src="presentasjon.js"></script>
+  <script src="edit.js"></script>
+  <script src="blend.js"></script>
+  <script src="hueRotate.js"></script>
 </body>
+
 </html>

@@ -1,15 +1,21 @@
 :root{
     --roadDelimiter: #ab2;
+    --paletteOne: #f5b5fc;
+    --paletteTwo: #96f7d2;
+    --paletteThree: #f0f696;
+    --paletteFour: #fcb1b1;
+    --paletteBackground: #222324;
+    --paletteBackgroundTwo: #303030;
 }
 body{
-    background: #393e46;
-    color: #96f7d2;
+    background: var(--paletteBackground);
+    color: var(--paletteTwo);
     margin: 0;
     font-size: 2rem;
     font-family: "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
 }
 h1 {
-    color: #f0f696;
+    color: var(--paletteThree);
     margin: 2rem 10rem
 }
 h1.mainTitle {
@@ -22,16 +28,16 @@ h1.mainTitle>span {
     mix-blend-mode: multiply;
 }
 h1.mainTitle>span:nth-child(4n + 1) {
-    color: #f5b5fc;
+    color: var(--paletteOne);
 }
 h1.mainTitle>span:nth-child(4n + 2) {
-    color: #96f7d2;
+    color: var(--paletteTwo);
 }
 h1.mainTitle>span:nth-child(4n + 3) {
-    color: #f0f696;
+    color: var(--paletteThree);
 }
 h1.mainTitle>span:nth-child(4n + 4) {
-    color: #fcb1b1;
+    color: var(--paletteFour);
 }
 .slide{
     width: 100%;
@@ -67,13 +73,14 @@ h1.mainTitle>span:nth-child(4n + 4) {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    margin-bottom: 2rem;
 }
 .content--sideBySide {
     flex-direction: row;
 }
 code {
     padding: 1rem;
-    background: #455;
+    background: var(--paletteBackgroundTwo); 
     border-radius: 3px;
 }
 .code--componentName {

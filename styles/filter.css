@@ -1,0 +1,27 @@
+.filterBasic {
+    width: 10vw;
+    height: 10vw;
+    border-radius: 50%;
+    background-color: #111;
+}
+
+
+.pixelGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+.pixel {
+    background-color: var(--paletteBackgroundTwo);
+    padding: 5px;
+    border-radius: 5px;
+}
+.pixel--focus {
+    color: var(--paletteOne)
+}
+.gridMath {
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    font-size: 1.5rem;
+    color: var(--paletteThree);
+}

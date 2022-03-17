@@ -1,0 +1,56 @@
+#colorwheel {
+    
+    width: 200px;
+    height: 50px;
+    border-left: 50px solid #0f0;
+    transition: 5s;
+    transform: translate3d(-50px, 50px, 0);
+    will-change: filter, transform;
+    position: absolute;
+}
+#colorwheel.colorwheel--coolio {
+  filter: hue-rotate(360deg);
+  transform: translate3d(-50px, 50px, 0) rotate(-360deg);
+}
+.colorwheel--huge {
+    width: 5000px;
+    height: 200px;
+}
+
+.colorwheel {
+    height: 150px;
+    transform: rotate(-22deg);
+}
+
+.wheelContainer {
+  position: relative;
+  margin-bottom: 50px;
+  margin-top: 50px;
+}
+
+.clickMe--button:active {
+  transform: translate3d(-1px, -1px, 2px);
+}
+
+.clickMe {
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+  border: 3px solid #343436;
+  background: #343436;
+
+  font-size: 1rem;
+  text-shadow: none;
+  line-height: 1.2;
+  border: 0;
+  outline: 0;
+  padding: 10px 16px;
+  border-radius: 3px;
+  border: 3px solid transparent;
+  color: white;
+  cursor: pointer;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  text-align: center;
+}
