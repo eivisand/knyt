@@ -9,6 +9,7 @@
 .filterEdit {
   display: flex;
   width: 100%;
+  min-width: 28rem;
 }
 .filterEdit-input {
   margin-left: auto;

@@ -79,3 +79,18 @@ var setBasicBlur = function(value){
   console.log(basicBlur)
   basicBlur.setAttribute("style", `filter: blur(${value}px)`);
 }
+
+let customFilterOn = false
+
+function toggleCustomFilter() {
+  customFilterOn = !customFilterOn;
+  const nodeToToggle = document.getElementById("filterCustom");
+  if(!nodeToToggle) {
+    return;
+  }
+  if(customFilterOn) {
+    nodeToToggle.setAttribute("style", "filter: url('#customFilter')")
+  } else {
+    nodeToToggle.setAttribute("style", "")
+  }
+}

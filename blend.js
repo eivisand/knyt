@@ -91,7 +91,8 @@ function blendScreen() {
 }
 
 function setBlendMode(value, query) {
-  const element = document.querySelector(query);
-  if(!element) return;
-  element.setAttribute('style', `mix-blend-mode: ${value};`)
+  const nodes = document.querySelectorAll(query);
+  if(!nodes) return;
+  nodes.forEach(node => node.setAttribute('style', `mix-blend-mode: ${value};`))
+  
 }

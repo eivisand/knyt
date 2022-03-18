@@ -3,9 +3,9 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Knyt</title>
+  <title>Blend and Filter</title>
   <meta name="author" content="!win">
-  <meta name="description" content="presentasjon av skolisser">
+  <meta name="description" content="Presentation slides for Filters and Blend Modes in CSS">
   <link href="styles/slides.css" rel="stylesheet">
   <link href="styles/edit.css" rel="stylesheet">
   <link href="styles/filter.css" rel="stylesheet">
@@ -38,7 +38,7 @@
   </div>
   <div class="slide">
     <div class="slideContent">
-      <h2>Filter example: brightness</h1>
+      <h2>Filter: brightness</h1>
         <div class="content">
           <code>brightness(200%) 
           #111 -> #222</code>
@@ -60,7 +60,7 @@
   </div>
   <div class="slide">
     <div class="slideContent">
-      <h2>Filter example: hue-rotate</h1>
+      <h2>Filter: hue-rotate</h1>
         <code>hue-rotate(180deg) 
           #f00 -> #0ff</code>
         <div class="wheelContainer">
@@ -76,14 +76,34 @@
   </div>
   <div class="slide">
     <div class="slideContent">
-      <h2>Filter example: blur</h1>
+      <h2>Filter: blur</h1>
         <ul>
           <li>
             Weighted average of some radius of pixels
           </li>
         </ul>
         <div class="content">
-          <h3>Equal weights blur with 1px radius:</h3>
+          <form class="filterEdit" oninput="amount.value=inputRange.value">
+            <span>blur(</span>
+            <output name="amount" for="inputRange">0</output><span>px)</span>
+            <input type="range" name="inputRange" class="filterEdit-input" onInput="setBasicBlur(this.value)"
+              value="0" min="0" max="10" />
+          </form>
+        </div>
+        <div class="content">
+          <img class="filterBasic" id="filterBlur" src="resources/josten.jpg">
+
+        </div>
+
+    </div>
+  </div>
+  <div class="slide">
+    <div class="slideContent">
+      <h2>Filter: blur</h1>
+        <div class="content">
+          Equal weights blur calculation with 1px radius:
+        </div>
+        <div class="content">
           <div class="pixelGrid">
             <div class="pixel">10</div><div class="pixel">20</div><div class="pixel">20</div>
             <div class="pixel">10</div><div class="pixel pixel--focus">20</div><div class="pixel">20</div>
@@ -98,18 +118,7 @@ blur(1px) -> [ 1, 1, 1 ] * [ 10, 20, 20 ] / 9  -> 150/9 -> 17
             <div class="pixel">10</div><div class="pixel">20</div><div class="pixel">20</div>
           </div>
         </div>
-        <div class="content">
-          <form class="filterEdit" oninput="amount.value=inputRange.value">
-            <span>blur(</span>
-            <output name="amount" for="inputRange">0</output><span>px)</span>
-            <input type="range" name="inputRange" class="filterEdit-input" onInput="setBasicBlur(this.value)"
-              value="0" min="0" max="10" />
-          </form>
-        </div>
-        <div class="content">
-          <img class="filterBasic" id="filterBlur" src="resources/josten.jpg">
 
-        </div>
     </div>
   </div>
   <div class="slide">
@@ -187,9 +196,42 @@ blur(1px) -> [ 1, 1, 1 ] * [ 10, 20, 20 ] / 9  -> 150/9 -> 17
   </div>
   <div class="slide">
     <div class="slideContent">
+      <h2>Filter: custom filters</h1>
+        <div class="content">
+          Create any custom filter with 
+        </div>
+        <div class="content">
+          <code>
+            <pre>&lt;filter id<span class="pl-c1">=</span><span class="pl-s">"customFilter"</span><span class="pl-c1">&gt;</span>
+  &lt;feFlood result<span class="pl-c1">=</span><span class="pl-s">"floodFill"</span> 
+    <span class="pl-ent">flood-color</span><span class="pl-c1">=</span><span class="pl-s">"pink"</span>/&gt;
+  &lt;feBlend <span class="pl-ent">in</span><span class="pl-c1">=</span><span class="pl-s">"SourceGraphic"</span> <span class="pl-ent">in2</span><span class="pl-c1">=</span><span class="pl-s">"floodFill"</span> <span class="pl-ent">mode</span><span class="pl-c1">=</span><span class="pl-s">"multiply"</span><span class="pl-c1">/</span><span class="pl-c1">&gt;</span>
+&lt;<span class="pl-c1">/</span>filter<span class="pl-c1">&gt;</span></pre>
+          </code>
+          <svg style="height: 0;">
+            <defs>
+              <filter id="customFilter">
+                <feFlood result="floodFill" x="0" y="0" width="100%" height="100%"
+                flood-color="var(--paletteOne)" flood-opacity="1"/>
+                               <feBlend in="SourceGraphic" in2="floodFill" mode="multiply"/>
+              </filter>
+            </defs>
+          </svg>
+        </div>
+        <div class="content">
+          <button class="clickMe clickMe--button" onclick="toggleCustomFilter()">Toggle filter</button>
+        </div>
+        <div class="content">
+          <img class="filterCustom" id="filterCustom"  src="resources/josten.jpg">
+        </div>
+
+    </div>
+  </div>
+  <div class="slide">
+    <div class="slideContent">
       <h2>Fun with filters</h2>
       <div class="content">
-        The quickest darkmode implementation you've seen
+        Minimum non-viable darkmode
       </div>
       <div class="content">
         <code><pre><span class="code--componentName">body</span> <span class="code--operation">{</span>
@@ -244,7 +286,9 @@ blur(1px) -> [ 1, 1, 1 ] * [ 10, 20, 20 ] / 9  -> 150/9 -> 17
   <div class="slide">
     <div class="slideContent">
       <h2>Screen</h2>
-      the inverse of multiply
+      <div class="content">
+        the inverse of multiply
+      </div>
       <div id="blendScreen">
         <form onsubmit="return false">
           <div class="content content--sideBySide">
@@ -264,8 +308,8 @@ blur(1px) -> [ 1, 1, 1 ] * [ 10, 20, 20 ] / 9  -> 150/9 -> 17
   </div>
   <div class="slide">
     <div class="slideContent">
-      <h2>Blend modes Demo</h2>
-      <select name="blendModes" id="blendModeSelect" class="clickMe" oninput="setBlendMode(this.value, '.cloudyValley')">
+      <h1 class="mainTitle blendDemo--title">Blend modes Demo</h1>
+      <select name="blendModes" id="blendModeSelect" class="clickMe" oninput="setBlendMode(this.value, '.cloudyValley'), setBlendMode(this.value, '.blendDemo--title>span')">
         <option value="normal">normal</option>
         <option value="multiply">multiply</option>
         <option value="screen">screen</option>
